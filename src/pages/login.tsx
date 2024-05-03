@@ -1,5 +1,6 @@
-"use client";
+import { useRouter } from "next/router"; // Import the useRouter hook
 import supabase from "../../supabase";
+import { FaGoogle } from "react-icons/fa";
 import {
   Flex,
   Box,
@@ -18,7 +19,6 @@ import {
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 
 export default function Login() {
   const router = useRouter(); // Initialize the router
@@ -28,8 +28,16 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  async function SignIn() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "https://platform.shikshafinder.com/",
+      },
+    });
+  }
+
   const Signin = async () => {
-    const Router = useRouter();
     if (!email || !password) {
       toast({
         title: "Error.",
@@ -47,9 +55,9 @@ export default function Login() {
       });
 
       setTimeout(() => {
-        Router.reload();
+        router.reload();
       }, 2000);
-      router.push("/form");
+      router.push("/school");
     } catch (error) {
       console.log(error);
     }
@@ -125,13 +133,22 @@ export default function Login() {
                   Signup
                 </Link>
               </Text>
-            </Stack>
-            <Stack align={"center"}>
-              {" "}
-              <Link href="/magicLink">
+              <br />
+              <Stack align={"center"}>
                 {" "}
-                <Text color={"blue.500"}>Forgot password?</Text>
-              </Link>
+                <Link href="/magicLink">
+                  {" "}
+                  <Text color={"blue.500"}>Forgot password?</Text>
+                </Link>
+              </Stack>
+              <br />
+              <Button
+                colorScheme="telegram"
+                onClick={SignIn}
+                leftIcon={<FaGoogle />}
+              >
+                Signin with Google
+              </Button>
             </Stack>
           </Stack>
         </Box>
