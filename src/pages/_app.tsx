@@ -19,7 +19,7 @@ require("dotenv").config();
 
 const inter = Inter({ subsets: ["latin"] });
 const supabaseUrl = "https://qgkjakomwapzuhvnrvgr.supabase.co";
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "";
+const supabaseKey = process.env.NEXT_SUPABASE_KEY ?? "";
 
 export default function App({
   Component,
