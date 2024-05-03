@@ -246,7 +246,7 @@ function CoachingForm() {
                 <Input
                   {...register("mobile", { required: true })}
                   name="mobile"
-                  type="tel"
+                  type="number"
                   placeholder="Contact number"
                 />
               </FormControl>{" "}
