@@ -10,7 +10,7 @@ export default function Success() {
       <Heading as="h2" size="xl" mt={6} mb={2}>
         Congratulations You have successfully submitted your form
       </Heading>
-      <Text color={"gray.500"}>
+      <Text>
         Please Connect with our Customer Support for Completing the Payment &
         show ads to the most relevant audience.
       </Text>
