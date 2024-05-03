@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <NextSeo
-        title="Shiksha Finder"
+        title="/icon-192x192.png"
         description="Show case the quality of education"
         openGraph={{
           url: "https://platform.shikshafinder.com/",
@@ -33,7 +33,7 @@ export default function Home() {
           description: "Home page of shiksha finder",
           images: [
             {
-              url: "",
+              url: "/icon-192x192.png",
               alt: "Shiksha Finder == happy students",
             },
           ],
