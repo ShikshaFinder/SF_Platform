@@ -41,9 +41,18 @@ function marketingDetail() {
   const [Image, setImage] = useState<any>(null);
 
   if (!user.email) {
-    return (
-     <Nouser/>  
-    );
+    return <Nouser />;
+  }
+
+  function extractVideoId(url: string) {
+    const prefix = "https://youtu.be/";
+    if (url.startsWith(prefix)) {
+      const idAndParams = url.slice(prefix.length);
+      const [videoId] = idAndParams.split("?");
+      return videoId;
+    } else {
+      return null;
+    }
   }
 
   const handleSubmitt = () => {
@@ -75,6 +84,20 @@ function marketingDetail() {
   };
 
   const onSubmit = async (data: any) => {
+    const videoId = extractVideoId(data.videolink);
+    if (videoId) {
+      data.videolink = videoId;
+    } else {
+      toast({
+        title: "Error",
+        description: "Invalid YouTube video URL",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
@@ -107,7 +130,8 @@ function marketingDetail() {
       console.error("Error submitting Form:", error);
       toast({
         title: "Error",
-        description: "You can submit one banner ad at a time,if you want to submit more contact us",
+        description:
+          "You can submit one banner ad at a time,if you want to submit more contact us",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -268,6 +292,14 @@ function marketingDetail() {
               <Input type="file" accept="image/*" onChange={handleImage} />
             </FormControl>{" "}
             <br />
+            <FormControl isRequired>
+              <FormLabel> Introduction Video Youtube video link</FormLabel>
+              <Input
+                {...register("videolink", { required: true })}
+                name="videolink"
+                placeholder="enter the youtube video link"
+              />
+            </FormControl>{" "}
             <br />
             <Button
               colorScheme="teal"

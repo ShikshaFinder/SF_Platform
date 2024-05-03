@@ -24,9 +24,9 @@ export default function Home() {
   const { user } = useAuthContext();
   return (
     <>
-    
+
       <NextSeo
-        title="/icon-192x192.png"
+        title="Shiksha Finder"
         description="Show case the quality of education"
         openGraph={{
           url: "https://platform.shikshafinder.com/",
