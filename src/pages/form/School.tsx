@@ -137,9 +137,7 @@ function formm() {
         isClosable: true,
       });
     } else {
-      const { error } = await supabase
-        .from("votes")
-        .insert([{ user_id: user.id }]);
+      
       handleSubmitt();
     }
   };
