@@ -57,7 +57,7 @@ export default function Login() {
       setTimeout(() => {
         router.reload();
       }, 2000);
-      router.push("/school");
+      router.push("/form");
     } catch (error) {
       console.log(error);
     }
