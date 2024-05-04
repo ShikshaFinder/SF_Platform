@@ -57,7 +57,9 @@ function formm() {
       duration: 3000,
       isClosable: true,
     });
-    setTimeout(() => {Router.reload()}, 2000);
+    setTimeout(() => {
+      Router.reload();
+    }, 2000);
     Router.push("/aboutcontest");
   };
   if (!user.email) {
@@ -103,7 +105,8 @@ function formm() {
     } catch (error) {
       toast({
         title: "Error",
-        description:"There is an error uploading image please wait and try again.",
+        description:
+          "There is an error uploading image please wait and try again.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -122,7 +125,7 @@ function formm() {
     }
     const { error } = await supabase
       .from("School")
-      .insert([{ ...data, user_id: user.id, img: img_url, email : user.email}]);
+      .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
     if (error) {
       console.error("Error submitting Form:", error);
@@ -134,6 +137,9 @@ function formm() {
         isClosable: true,
       });
     } else {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ user_id: user.id }]);
       handleSubmitt();
     }
   };
@@ -333,7 +339,6 @@ function formm() {
                 />
               </FormControl>
               <br />
-              
               <FormControl as="fieldset">
                 <FormLabel as="legend">Medium</FormLabel>
                 <Controller
