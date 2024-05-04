@@ -82,6 +82,11 @@ function formm() {
     return public_url;
   };
 
+  async function Harsh() {
+    const { error } = await supabase
+      .from("votes")
+      .insert([{ user_id: user.id }]);
+  }
   const onSubmit = async (data: any) => {
     const videoId = extractVideoId(data.videolink);
     if (videoId) {
@@ -135,6 +140,7 @@ function formm() {
         isClosable: true,
       });
     } else {
+      Harsh();
       handleSubmitt();
     }
   };

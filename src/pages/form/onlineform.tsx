@@ -46,7 +46,9 @@ function formm() {
       return null;
     }
   }
-
+async function Harsh() {
+  const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
+}
   const handleSubmitt = () => {
     toast({
       title: "Form submitted!",
@@ -135,6 +137,7 @@ function formm() {
         isClosable: true,
       });
     } else {
+      Harsh();  
       handleSubmitt();
     }
   };

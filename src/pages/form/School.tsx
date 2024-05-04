@@ -49,6 +49,10 @@ function formm() {
     }
   }
 
+async function Harsh() {
+const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
+}
+
   const handleSubmitt = () => {
     toast({
       title: "Form submitted!",
@@ -57,11 +61,13 @@ function formm() {
       duration: 3000,
       isClosable: true,
     });
+    
     setTimeout(() => {
       Router.reload();
     }, 2000);
     Router.push("/aboutcontest");
   };
+
   if (!user.email) {
     return <Nouser />;
   }
@@ -127,6 +133,7 @@ function formm() {
       .from("School")
       .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
+      
     if (error) {
       console.error("Error submitting Form:", error);
       toast({
@@ -137,7 +144,7 @@ function formm() {
         isClosable: true,
       });
     } else {
-      
+      Harsh();
       handleSubmitt();
     }
   };
