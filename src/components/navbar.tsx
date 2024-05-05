@@ -309,7 +309,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/contest",
     children: [
       {
-        label: "Participate in the best learning platform contest",
+        label: "Participate in the ShikshaStar contest",
         subLabel: "And showcase the trust of your students on you 😎",
         href: "/contest",
       },
