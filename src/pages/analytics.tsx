@@ -31,6 +31,7 @@ const StatsWithIcons = () => {
   console.log(user);
   const toast = useToast();
   const [userData, setUserData] = React.useState<any>([]);
+  const [view, setView] = React.useState<any>([]);
 
   async function fetchdata() {
   if(user.user_metadata.lastName !== null){ 
@@ -77,6 +78,23 @@ const StatsWithIcons = () => {
     fetchdata();
   }, [user]);
 
+  const fetchBannerAdView = async () => {
+    const { data, error } = await supabase
+      .from("banneradview")
+      .select("view")
+      .eq("user_id", user.id)
+    // .eq("District", user?.Board)
+    //percentage * rating
+
+setView(data);
+    if (error) {
+      console.error("Error fetching leaderboard data:", error);
+    } else {
+      console.log(data);
+    }
+  };
+
+
   const statData: StatData[] = [
     {
       id: 1,
@@ -93,7 +111,7 @@ const StatsWithIcons = () => {
     {
       id: 3,
       label: "Banner views (Number of page visits in banner)",
-      score: 1,
+      score: view && view[0]?.view,
       icon: HiOutlineMail,
     },
   ];
