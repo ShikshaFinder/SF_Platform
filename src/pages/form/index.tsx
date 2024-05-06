@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, Stack, AspectRatio,Box } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useRouter } from "next/router";
 import { useUser } from "../../../store";
@@ -7,10 +7,9 @@ import { useUser } from "../../../store";
 function form() {
   const router = useRouter();
   const useUse = useUser();
-     function addInstitutionn(institute: string) {
-      router.push("updateprofile/" + institute);
-    }
-   
+  function addInstitutionn(institute: string) {
+    router.push("updateprofile/" + institute);
+  }
 
   async function addInstitution(institute: string) {
     const typeOfInstitute = institute;
@@ -59,6 +58,26 @@ function form() {
             Update Skill Class Informtion 🎨
           </Button>
         </Stack>
+        <br />
+        <br />
+        <Box
+          position={"relative"}
+          height={"250px"}
+          rounded={"2xl"}
+          boxShadow={"2xl"}
+          width={"full"}
+          overflow={"hidden"}
+        >
+          <AspectRatio ratio={14 / 9}>
+            <iframe
+              width="600"
+              height="400"
+              src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
+              title="Shiksha Finder video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+          </AspectRatio>
+        </Box>
       </>
     );
   }
@@ -96,6 +115,26 @@ function form() {
           I Have A Skill Class 🎨
         </Button>
       </Stack>
+      <br />
+      <br />
+      <Box
+        position={"relative"}
+        height={"250px"}
+        rounded={"2xl"}
+        boxShadow={"2xl"}
+        width={"full"}
+        overflow={"hidden"}
+      >
+        <AspectRatio ratio={14 / 9}>
+          <iframe
+            width="600"
+            height="400"
+            src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
+            title="Shiksha Finder video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </AspectRatio>
+      </Box>
     </>
   );
 }

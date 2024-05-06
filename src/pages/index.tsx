@@ -24,7 +24,6 @@ export default function Home() {
   const { user } = useAuthContext();
   return (
     <>
-
       <NextSeo
         title="Shiksha Finder"
         description="Show case the quality of education"
@@ -151,7 +150,7 @@ export default function Home() {
                 <iframe
                   width="600"
                   height="400"
-                  src="https://www.youtube.com/embed/SSIeK18tkjM?si=zQfs_xRBnKAwl7HL"
+                  src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
                   title="Shiksha Finder video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>
