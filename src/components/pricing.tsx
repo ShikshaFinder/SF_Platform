@@ -31,7 +31,7 @@ const plansList = [
       "50 banner ad views",
       "minimum 1 form filled by students",
       "50 video ads view ",
-      "5% discount on next plan purchase",
+      "5% discount on next plan purchase(one time)",
     ],
   },
   {
@@ -42,7 +42,7 @@ const plansList = [
       "750 banner ad views",
       "minimum 12 forms filled by students",
       "750 video ads view ",
-      "10% discount on next plan purchase",
+      "10% discount on next plan purchase(one time)",
     ],
   },
   {
@@ -51,9 +51,9 @@ const plansList = [
     icon: FaServer,
     features: [
       "Connect us for custom plan",
-      "Online forms guarantee based on plans",
+      "Custom new placement of ads unlocked !",
       "cost effective than other plans",
-      "15% discount on next plan purchase",
+      "15% discount on next plan purchase(2 times)",
     ],
   },
 ];
