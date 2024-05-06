@@ -119,13 +119,13 @@ function form() {
       <br />
       <Box
         position={"relative"}
-        height={"250px"}
+        height={"auto"}
         rounded={"2xl"}
         boxShadow={"2xl"}
         width={"full"}
         overflow={"hidden"}
       >
-        <AspectRatio ratio={14 / 9}>
+        <AspectRatio ratio={16 / 9}>
           <iframe
             width="600"
             height="400"
