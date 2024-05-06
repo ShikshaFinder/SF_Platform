@@ -32,7 +32,7 @@ function terms() {
       the websites reserve the right to change the terms and conditions at any
       time. For guaranteed views and form completions, time is not a factor; it
       may take as long as necessary.After the completion of views, the filling
-      of forms may take additional time.The forms filled by the users are not
+      of forms may take additional time.We are open to discuss how we store and update view,by purchasing you trust on us and our process.The forms filled by the users are not
       our responsibilty that they will be paid cutomeers or not,we will provide
       you details than you have to connect and convince them to take admission
       in your Institute. Our vision is to create a business that supports all

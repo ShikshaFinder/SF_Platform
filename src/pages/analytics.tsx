@@ -34,7 +34,7 @@ const StatsWithIcons = () => {
   const [view, setView] = React.useState<any>([]);
 
   async function fetchdata() {
-  if(user.user_metadata.lastName !== null){ 
+    if (user.user_metadata.lastName !== null) {
       if (user.user_metadata.lastName === "School") {
         const { data, error } = await supabase
           .from("viewschool")
@@ -73,7 +73,8 @@ const StatsWithIcons = () => {
           isClosable: true,
         });
       }
-  }}
+    }
+  }
   useEffect(() => {
     fetchdata();
   }, [user]);
@@ -82,18 +83,17 @@ const StatsWithIcons = () => {
     const { data, error } = await supabase
       .from("banneradview")
       .select("view")
-      .eq("user_id", user.id)
+      .eq("user_id", user.id);
     // .eq("District", user?.Board)
     //percentage * rating
 
-setView(data);
+    setView(data);
     if (error) {
       console.error("Error fetching leaderboard data:", error);
     } else {
       console.log(data);
     }
   };
-
 
   const statData: StatData[] = [
     {
@@ -110,7 +110,7 @@ setView(data);
     },
     {
       id: 3,
-      label: "Banner views (Number of page visits in banner)",
+      label: "BannerAD & Video Ad views",
       score: view && view[0]?.view,
       icon: HiOutlineMail,
     },

@@ -12,7 +12,7 @@ import {
   Textarea,
   Toast,
 } from "@chakra-ui/react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import supabase from "../../supabase";
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
