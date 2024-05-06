@@ -339,7 +339,7 @@ async function Harsh() {
                 <FormLabel>Upload cover Image</FormLabel>
                 <Input type="file" accept="image/*" onChange={handleImage} />
               </FormControl>{" "}
-              <br />
+              
               <br />
               <FormControl isRequired>
                 <FormLabel> Introduction video Youtube video link</FormLabel>
