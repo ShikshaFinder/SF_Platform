@@ -181,7 +181,7 @@ function formm() {
                 <FormLabel>Discription</FormLabel>
                 <Input
                   {...register("discription", {
-                    required: true
+                    required: true,
                   })}
                   name="discription"
                   placeholder="Facilities,Fees,etc"
@@ -197,7 +197,7 @@ function formm() {
                   })}
                   name="location"
                   placeholder="Exact address of institute"
-                    defaultValue={useUse?.location || ""}
+                  defaultValue={useUse?.location || ""}
                 />
                 <br />
                 <Input
@@ -206,7 +206,7 @@ function formm() {
                   })}
                   name="locationlink"
                   placeholder="Google map link of school <in form of https only"
-                    defaultValue={useUse?.locationlink || ""}
+                  defaultValue={useUse?.locationlink || ""}
                 />
               </FormControl>
               <br />
@@ -251,13 +251,24 @@ function formm() {
               </FormControl>
               <br />
               <FormControl isRequired>
+                <FormLabel>Website</FormLabel>
+                <Input
+                  {...register("website", {
+                    required: true,
+                  })}
+                  name="website"
+                  placeholder="https://example.com/"
+                />
+              </FormControl>
+              <br />
+              <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
                   {...register("mobile1", { required: true })}
                   name="mobile1"
                   type="number"
                   placeholder="Contact number"
-                    defaultValue={useUse?.mobile1 || ""}
+                  defaultValue={useUse?.mobile1 || ""}
                 />
                 <FormControl isRequired>
                   <FormLabel>Number Of Students</FormLabel>
@@ -342,7 +353,7 @@ function formm() {
                   {...register("exam", { required: false })}
                   name="exam"
                   placeholder="JEE,NEET,etc"
-                    defaultValue={useUse?.exam || ""}
+                  defaultValue={useUse?.exam || ""}
                 />
               </FormControl>
               <br />

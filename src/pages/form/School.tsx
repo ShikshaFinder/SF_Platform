@@ -252,6 +252,17 @@ const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
               </FormControl>
               <br />
               <FormControl isRequired>
+                <FormLabel>Website</FormLabel>
+                <Input
+                  {...register("website", {
+                    required: true,
+                  })}
+                  name="website"
+                  placeholder="https://example.com/"
+                />
+              </FormControl>
+              <br />
+              <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
                   {...register("mobile1", { required: true })}
