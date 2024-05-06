@@ -12,9 +12,8 @@ import {
   Alert,
   AlertIcon,
   Link,
-} from "@chakra-ui/react";  
+} from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-
 
 // Here we have used react-icons package for the icons
 
@@ -29,10 +28,10 @@ const plansList = [
     price: "499",
     icon: IoIosListBox,
     features: [
-      "100 banner ad views",
-      "100 views in the first page",
-      "10 video ads view ",
-      "3 online admission forms and their details",
+      "50 banner ad views",
+      "minimum 1 form filled by students",
+      "50 video ads view ",
+      "5% discount on next plan purchase",
     ],
   },
   {
@@ -40,21 +39,21 @@ const plansList = [
     price: "4999",
     icon: IoIosRocket,
     features: [
-      "1100 banner ad views",
-      "1500 views in the first page",
-      "100 video ads view ",
-      "35 online admission forms and their details",
+      "750 banner ad views",
+      "minimum 12 forms filled by students",
+      "750 video ads view ",
+      "10% discount on next plan purchase",
     ],
   },
   {
-    title: "Pro",
-    price: "49k",
+    title: "Custom Plan (Pro)",
+    price: "Contact Us",
     icon: FaServer,
     features: [
-      "10000 banner ad views",
-      "10000 views in the first page",
-      "1000 video ads view ",
-      "300 online admission forms and their details",
+      "Connect us for custom plan",
+      "Online forms guarantee based on plans",
+      "cost effective than other plans",
+      "15% discount on next plan purchase",
     ],
   },
 ];
@@ -67,7 +66,7 @@ const ThreeTiersPricing = () => {
         This Platform is for schools ,coaching classes and Skill classes
         only..If you want to target audience in a larger bucket than{" "}
         <Link href="   https://marketing.shikshafinder.com/" isExternal>
-      &nbsp;    Marketing with shiksha finder <ExternalLinkIcon mx="2px" />
+          &nbsp; Marketing with shiksha finder <ExternalLinkIcon mx="2px" />
         </Link>
       </Alert>
       <chakra.h2 fontSize="5xl" fontWeight="bold" textAlign="center" mb={5}>

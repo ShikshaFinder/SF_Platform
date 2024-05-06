@@ -58,7 +58,7 @@ function CoachingForm() {
       duration: 3000,
       isClosable: true,
     });
-    Router.push("/aboutcontest");
+    Router.push("/marketing");
   };
   if (!user.email) {
     return <Nouser />;

@@ -29,7 +29,6 @@ function profile({
   Board,
   medium,
   standard,
-  mobilenumber,
 }: {
   name: string;
   city: string;
@@ -38,7 +37,6 @@ function profile({
   Board: string;
   medium: string;
   standard: string;
-  mobilenumber: string;
 }) {
   return (
     <Container justifyContent={"center"}>

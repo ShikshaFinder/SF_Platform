@@ -21,6 +21,7 @@ import {
   CheckboxGroup,
   Select,
   useToast,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -103,7 +104,6 @@ async function Harsh() {
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
-      console.log("public url : ", img_url);
     } catch (error) {
       toast({
         title: "Error",
@@ -152,8 +152,6 @@ async function Harsh() {
   const handleImage = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
-    console.log(file);
-    // console.log(Image);
   };
   return (
     <>
@@ -179,12 +177,17 @@ async function Harsh() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="you@example.com"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                 />
               </FormControl>
               <br />
@@ -339,7 +342,6 @@ async function Harsh() {
                 <FormLabel>Upload cover Image</FormLabel>
                 <Input type="file" accept="image/*" onChange={handleImage} />
               </FormControl>{" "}
-              
               <br />
               <FormControl isRequired>
                 <FormLabel> Introduction video Youtube video link</FormLabel>

@@ -1,15 +1,14 @@
-"use client";
-
 import {
   Avatar,
   Box,
   chakra,
-  Container,
   Flex,
-  Icon,
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
+
+const avatar =
+  "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80";
 
 const testimonials = [
   {
@@ -17,32 +16,29 @@ const testimonials = [
     role: "Student",
     content:
       "Shiksha Finder is amazing! It helped me find the perfect school and coaching class for my needs. I highly recommend it!",
-    avatar:
-      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    avatar: avatar,
   },
   {
     name: "Yash Navsarivala",
     role: "Parent",
     content:
       "As a parent, I was worried about finding the right educational institutions for my child. Shiksha Finder made the process easy and stress-free. Thank you!",
-    avatar:
-      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    avatar: avatar,
   },
   {
-    name: "Diya Vora ",
+    name: "Hinal Jani ",
     role: "Teacher",
     content:
       "Shiksha Finder is a valuable tool for educators. It helps connect students with the best learning resources. I use it regularly in my teaching.",
-    avatar:
-      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    avatar: avatar,
   },
   {
-    name: "Ryan International School, Delhi",
+    name: "Maria Institute, Isanpur",
     role: "Principal",
     content:
       "I'm impressed with Shiksha Finder's ability to streamline the school selection process. It's an invaluable resource for students and parents alike.",
     avatar:
-      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+      avatar,
   },
 ];
 
