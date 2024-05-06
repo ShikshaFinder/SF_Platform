@@ -21,7 +21,7 @@ import {
   Card,
   CardBody,
   CheckboxGroup,
-  Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -178,12 +178,17 @@ async function Harsh() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="Discription of your platform"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                 />
               </FormControl>
               <br />

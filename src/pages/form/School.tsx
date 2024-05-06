@@ -24,6 +24,7 @@ import {
   CardBody,
   CheckboxGroup,
   Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -49,9 +50,11 @@ function formm() {
     }
   }
 
-async function Harsh() {
-const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
-}
+  async function Harsh() {
+    const { error } = await supabase
+      .from("votes")
+      .insert([{ user_id: user.id }]);
+  }
 
   const handleSubmitt = () => {
     toast({
@@ -61,7 +64,7 @@ const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
       duration: 3000,
       isClosable: true,
     });
-    
+
     setTimeout(() => {
       Router.reload();
     }, 2000);
@@ -133,7 +136,6 @@ const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
       .from("School")
       .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
-      
     if (error) {
       console.error("Error submitting Form:", error);
       toast({
@@ -184,12 +186,17 @@ const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="Discription of your school"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                 />
               </FormControl>
               <br />

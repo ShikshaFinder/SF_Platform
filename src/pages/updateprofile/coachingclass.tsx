@@ -23,11 +23,13 @@ import {
   CheckboxGroup,
   Select,
   useToast,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
 import { BlobServiceClient } from "@azure/storage-blob";
 import Nouser from "@/components/Nouser";
+
 
 function CoachingForm() {
   const Router = useRouter();
@@ -176,12 +178,17 @@ function CoachingForm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="discription of your Institute"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                   defaultValue={useUse?.discription || ""}
                 />
               </FormControl>

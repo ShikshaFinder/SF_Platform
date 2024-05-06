@@ -15,12 +15,10 @@ import {
   FormLabel,
   Heading,
   Input,
-  Checkbox,
   Stack,
-  HStack,
   Card,
   CardBody,
-  CheckboxGroup,
+  Textarea,
   Select,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -195,12 +193,17 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="discription of your institute"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                   defaultValue={useUse?.discription || ""}
                 />
               </FormControl>

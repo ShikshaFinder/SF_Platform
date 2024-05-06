@@ -21,7 +21,7 @@ import {
   Card,
   CardBody,
   CheckboxGroup,
-  Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -175,12 +175,17 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="discription of your institute"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                   defaultValue={useUse?.discription || ""}
                 />
               </FormControl>
@@ -193,7 +198,7 @@ function formm() {
                   })}
                   name="State"
                   placeholder="State"
-                    defaultValue={useUse?.State || ""}
+                  defaultValue={useUse?.State || ""}
                 />
               </FormControl>
               <br />
@@ -213,7 +218,7 @@ function formm() {
                   {...register("link", { required: false })}
                   name="link"
                   placeholder="link of playstore"
-                    defaultValue={useUse?.link || ""}
+                  defaultValue={useUse?.link || ""}
                 />
               </FormControl>
               <br />
@@ -224,7 +229,7 @@ function formm() {
                   name="mobile"
                   type="number"
                   placeholder="Contact number"
-                    defaultValue={useUse?.mobile || ""}
+                  defaultValue={useUse?.mobile || ""}
                 />
               </FormControl>{" "}
               <br />
@@ -235,7 +240,7 @@ function formm() {
                   name="website"
                   type="website"
                   placeholder="website"
-                    defaultValue={useUse?.website || ""}
+                  defaultValue={useUse?.website || ""}
                 />
               </FormControl>{" "}
               <br />
@@ -263,7 +268,6 @@ function formm() {
                   {...(register("Standard"), { required: false })}
                   name="Standard"
                   placeholder="If Teaching for any exam than mention here"
-                  
                 />
               </FormControl>
               <br />
@@ -273,7 +277,7 @@ function formm() {
                   {...register("Board", { required: false })}
                   name="Board"
                   placeholder="Board / If applicable"
-                    defaultValue={useUse?.Board || ""}
+                  defaultValue={useUse?.Board || ""}
                 />
               </FormControl>
               <br />
@@ -308,7 +312,7 @@ function formm() {
                   {...register("videolink", { required: true })}
                   name="videolink"
                   placeholder="enter the youtube video link"
-                    defaultValue={useUse?.videolink || ""}
+                  defaultValue={useUse?.videolink || ""}
                 />
               </FormControl>{" "}
               <br />

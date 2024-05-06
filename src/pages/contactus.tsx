@@ -48,7 +48,13 @@ const Contact = () => {
   const onSubmit = async (data: any) => {
     const { error } = await supabase.from("contactus").insert([{ ...data }]);
     if (error) {
-      console.error("Error submitting feedback:", error);
+      toast({
+        title: "Please sign up or login.",
+        description: "Please Signup/Login.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     } else {
       handleSubmitt();
     }

@@ -8,7 +8,6 @@ import { useAuthContext } from "@/context";
 import Nouser from "@/components/Nouser";
 import { useUser } from "../../../store";
 
-
 interface State {
   districts: string[];
   state: string;
@@ -26,6 +25,7 @@ import {
   CardBody,
   CheckboxGroup,
   Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -39,9 +39,7 @@ function formm() {
   const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
-    const useUse = useUser((state) => state.user);
-
-
+  const useUse = useUser((state) => state.user);
 
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
@@ -179,12 +177,17 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
-                <Input
+                <Textarea
+                  placeholder="discription of your institute"
+                  rows={3}
+                  shadow="sm"
+                  focusBorderColor="brand.400"
                   {...register("discription", {
                     required: true,
                   })}
-                  name="discription"
-                  placeholder="Facilities,Fees,etc"
+                  fontSize={{
+                    sm: "sm",
+                  }}
                   defaultValue={useUse?.discription || ""}
                 />
               </FormControl>
@@ -270,27 +273,27 @@ function formm() {
                   placeholder="Contact number"
                   defaultValue={useUse?.mobile1 || ""}
                 />
-                <FormControl isRequired>
-                  <FormLabel>Number Of Students</FormLabel>
-                  <Select
-                    {...register("studentnumber", { required: true })}
-                    name="studentnumber"
-                    placeholder="Number Of Students"
-                  >
-                    <option value="15">10-20</option>
-                    <option value="25">20-30</option>
-                    <option value="55">50-60</option>
-                    <option value="85">80-90</option>
-                    <option value="125">100-150</option>
-                    <option value="250">200-500</option>
-                    <option value="850">700-1000</option>
-                    <option value="1500">1200-1800</option>
-                    <option value="2250">2000-2500</option>
-                    <option value="3000">more</option>
-                  </Select>
-                </FormControl>
-                <br />
               </FormControl>{" "}
+              <br />
+              <FormControl isRequired>
+                <FormLabel>Number Of Students</FormLabel>
+                <Select
+                  {...register("studentnumber", { required: true })}
+                  name="studentnumber"
+                  placeholder="Number Of Students"
+                >
+                  <option value="15">10-20</option>
+                  <option value="25">20-30</option>
+                  <option value="55">50-60</option>
+                  <option value="85">80-90</option>
+                  <option value="125">100-150</option>
+                  <option value="250">200-500</option>
+                  <option value="850">700-1000</option>
+                  <option value="1500">1200-1800</option>
+                  <option value="2250">2000-2500</option>
+                  <option value="3000">more</option>
+                </Select>
+              </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel> DISE code</FormLabel>

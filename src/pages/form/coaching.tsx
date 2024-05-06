@@ -178,7 +178,7 @@ async function Harsh() {
               <FormControl isRequired>
                 <FormLabel>Discription</FormLabel>
                 <Textarea
-                  placeholder="you@example.com"
+                  placeholder="discription of coaching class"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"
