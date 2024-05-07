@@ -51,20 +51,30 @@ function contest() {
                 Participate in the contest and show the strength you have 💪{" "}
               </b>
             </Text>
+            <Text py="3" size={"3xl"}>
+              Share this Links to your students{" "}
+            </Text>
           </CardBody>
-
+          {/* calll to action */}
           <CardFooter>
             {useUse && useUse.user_id ? (
               <Copybutton schoolName={useUse.user_id} />
             ) : (
-              <><Button onClick={()=>{
-                router.push("/form");
-              }}>Register platform</Button></>
+              <>
+                <Button
+                  onClick={() => {
+                    router.push("/form");
+                  }}
+                >
+                  Register platform
+                </Button>
+              </>
             )}
             &nbsp; &nbsp;
             {useUse && useUse.user_id ? (
               <Whatsapp schoolName={useUse.user_id} />
-            ):(<></>
+            ) : (
+              <></>
             )}
           </CardFooter>
         </Stack>

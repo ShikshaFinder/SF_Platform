@@ -315,7 +315,7 @@ const NAV_ITEMS: Array<NavItem> = [
       },
       {
         label: "About this Contest",
-        subLabel: "what is this contest & how i can avail the benefites of ",
+        subLabel: "what is this contest & how i can avail the benefits of ",
         href: "/aboutcontest",
       },
     ],

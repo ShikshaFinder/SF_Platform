@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Stack, AspectRatio,Box } from "@chakra-ui/react";
+import { Button, Stack, AspectRatio, Box } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useRouter } from "next/router";
 import { useUser } from "../../../store";
@@ -60,23 +60,26 @@ function form() {
         </Stack>
         <br />
         <br />
-        <Box
-          position={"relative"}
-          height={"250px"}
-          rounded={"2xl"}
-          boxShadow={"2xl"}
-          width={"full"}
-          overflow={"hidden"}
-        >
-          <AspectRatio ratio={14 / 9}>
-            <iframe
-              width="600"
-              height="400"
-              src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
-              title="Shiksha Finder video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            ></iframe>
-          </AspectRatio>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Box
+            position={"relative"}
+            height={"auto"}
+            rounded={"2xl"}
+            boxShadow={"2xl"}
+            width={{ base: "full", md: "1000px", lg: "1000px", xl: "1000px" }}
+            overflow={"hidden"}
+            alignContent={"center"}
+          >
+            <AspectRatio ratio={16 / 9}>
+              <iframe
+                width="600"
+                height="400"
+                src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
+                title="Shiksha Finder video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              ></iframe>
+            </AspectRatio>
+          </Box>
         </Box>
       </>
     );
@@ -118,22 +121,29 @@ function form() {
       <br />
       <br />
       <Box
-        position={"relative"}
-        height={"auto"}
-        rounded={"2xl"}
-        boxShadow={"2xl"}
-        width={"full"}
-        overflow={"hidden"}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
       >
-        <AspectRatio ratio={16 / 9}>
-          <iframe
-            width="600"
-            height="400"
-            src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
-            title="Shiksha Finder video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          ></iframe>
-        </AspectRatio>
+        <Box
+          position={"relative"}
+          height={"auto"}
+          rounded={"2xl"}
+          boxShadow={"2xl"}
+          width={{ base: "full", md: "1000px", lg: "1000px", xl: "1000px" }}
+          overflow={"hidden"}
+          alignContent={"center"}
+        >
+          <AspectRatio ratio={16 / 9}>
+            <iframe
+              width="600"
+              height="400"
+              src="https://www.youtube.com/embed/HLyahMyV5Bs?si=GIcLf3tC6GhaM0IH"
+              title="Shiksha Finder video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+          </AspectRatio>
+        </Box>
       </Box>
     </>
   );
