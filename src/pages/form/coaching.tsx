@@ -82,7 +82,18 @@ function CoachingForm() {
   };
 
 async function Harsh() {
-  const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
+try {
+    const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
+    
+} catch (error) {
+  toast({
+    title: "Error",
+    description: (error as Error).message,
+    status: "error",
+    duration: 3000,
+    isClosable: true,
+  });
+}
 }
 
   const onSubmit = async (data: any) => {
