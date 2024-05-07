@@ -18,6 +18,7 @@ import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import Studentlist from "./studentlist";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import { useUser } from "../../store";
 
 interface StatData {
   id: number;
@@ -28,7 +29,7 @@ interface StatData {
 
 const StatsWithIcons = () => {
   const { user } = useAuthContext();
-  console.log(user);
+  const useUse = useUser((state) => state.user);
   const toast = useToast();
   const [userData, setUserData] = React.useState<any>([]);
   const [view, setView] = React.useState<any>([]);
@@ -83,7 +84,7 @@ const StatsWithIcons = () => {
     const { data, error } = await supabase
       .from("banneradview")
       .select("view")
-      .eq("user_id", user.id);
+      .eq("user_id", useUse.user_id);
     // .eq("District", user?.Board)
     //percentage * rating
 
@@ -94,6 +95,10 @@ const StatsWithIcons = () => {
       console.log(data);
     }
   };
+
+  useEffect(() => {
+    fetchBannerAdView();
+  }, [useUse]);
 
   const statData: StatData[] = [
     {
