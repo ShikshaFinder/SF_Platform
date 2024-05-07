@@ -203,24 +203,18 @@ function marketingDetail() {
             </FormControl>{" "}
             <br />
             <FormControl isRequired>
-              <FormLabel>Standards of your target audience</FormLabel>
-              <Controller
+              <FormLabel>Standard You want to target </FormLabel>
+              <Select
+                {...register("Standard", { required: true })}
                 name="Standard"
-                control={control}
-                defaultValue={[]}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <CheckboxGroup {...field}>
-                    <HStack spacing="24px" wrap="wrap">
-                      <Checkbox value="Kg">Kinder Garden</Checkbox>
-                      <Checkbox value="ten">1-10</Checkbox>
-                      <Checkbox value="science">11-12 Science</Checkbox>
-                      <Checkbox value="Commerce">11-12 Commerce</Checkbox>
-                      <Checkbox value="Arts">11-12 Arts</Checkbox>
-                    </HStack>
-                  </CheckboxGroup>
-                )}
-              />
+                placeholder="standardcategory"
+              >
+                <option value="Nursery">Kinder Garden</option>
+                <option value="1">1-10</option>
+                <option value="2">11-12 Science</option>
+                <option value="3">11-12 Commerce</option>
+                <option value="4">11-12 Arts</option>
+              </Select>
             </FormControl>
             <br />
             <br />
