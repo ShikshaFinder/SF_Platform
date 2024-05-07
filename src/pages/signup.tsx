@@ -54,6 +54,17 @@ export default function SignupCard() {
           },
         },
       });
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        return;
+      }
+
       router.push("/checkmail");
     } catch (error) {
       console.log(error);
