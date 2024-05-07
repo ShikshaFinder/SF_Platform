@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Img, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import Nouser from "@/components/Nouser";
@@ -9,13 +9,14 @@ interface State {
   districts: string[];
   state: string;
 }
+
 import {
   Button,
   FormControl,
   FormLabel,
   Heading,
   Input,
-  Textarea  ,
+  Textarea,
   Stack,
   Card,
   CardBody,
@@ -30,7 +31,7 @@ function formm() {
   const toast = useToast();
   const { user } = useAuthContext();
   const form = useForm();
-  const { register, handleSubmit, control, watch } = form;
+  const { register, handleSubmit, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
 
@@ -53,9 +54,9 @@ function formm() {
       duration: 3000,
       isClosable: true,
     });
-        setTimeout(() => {
-          Router.reload();
-        }, 3000);
+    setTimeout(() => {
+      Router.reload();
+    }, 3000);
 
     Router.push("/aboutcontest");
   };
@@ -126,7 +127,7 @@ function formm() {
     }
     const { error } = await supabase
       .from("skillclass")
-      .insert([{ ...data, user_id: user.id, img: img_url ,email:user.email}]);
+      .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
     if (error) {
       console.error("Error submitting Form:", error);
@@ -221,8 +222,8 @@ function formm() {
                   name="location"
                   placeholder="Exact address of institute"
                 />
-                 </FormControl>
-                <br />
+              </FormControl>
+              <br />
               <FormControl isRequired>
                 <Input
                   {...register("locationlink", {

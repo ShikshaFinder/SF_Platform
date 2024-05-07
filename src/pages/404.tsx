@@ -6,7 +6,6 @@ import {
   Container,
   Button,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icon
 import Link from "next/link";
 import { AiOutlineTwitter, AiOutlineHome } from "react-icons/ai";
 import { BsInstagram } from "react-icons/bs";
