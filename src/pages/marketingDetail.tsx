@@ -216,31 +216,20 @@ function marketingDetail() {
                 <option value="4">11-12 Arts</option>
               </Select>
             </FormControl>
-            <br />
-            <br />
-            <FormControl as="fieldset">
-              <FormLabel as="legend">
-                Board in which your target audience studies
-              </FormLabel>
-              <Controller
+            <FormControl isRequired>
+              <FormLabel>Board of your students </FormLabel>
+              <Select
+                {...register("Board", { required: true })}
                 name="Board"
-                control={control}
-                defaultValue={[]}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <CheckboxGroup {...field}>
-                    <HStack spacing="24px" wrap="wrap">
-                      {" "}
-                      <Checkbox value="CBSE">CBSE</Checkbox>
-                      <Checkbox value="ICSE">ICSE</Checkbox>
-                      <Checkbox value="IB">IB</Checkbox>
-                      <Checkbox value="AISSCE">AISSCE</Checkbox>
-                      <Checkbox value="NIOS">NIOS</Checkbox>
-                      <Checkbox value="State">State Board</Checkbox>
-                    </HStack>
-                  </CheckboxGroup>
-                )}
-              />
+                placeholder="Board"
+              >
+                <option value="State">State Board</option>
+                <option value="CBSE">CBSE</option>
+                <option value="IB">IB</option>
+                <option value="ICSE">ICSE</option>
+                <option value="AISSCE">AISSCE</option>
+                <option value="NIOS">NIOS</option>
+              </Select>
             </FormControl>
             <br />
             <FormControl isRequired>
