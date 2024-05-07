@@ -68,6 +68,7 @@ function Profile() {
               Standard={useUse?.Standard ||  useUse?.subdistrict || "10th"}
               city={useUse?.District || useUse?.city || "Ahmedabad"}
               studentnumber={useUse?.studentnumber || useUse?.mobile || useUse?.mobile1 ||0}
+             
             />
           </TabPanel>
           <TabPanel>

@@ -29,7 +29,8 @@ function profile({
   Board,
   Medium,
   Standard,
-studentnumber
+studentnumber,
+
 }: {
   name: string;
   city: string;
@@ -38,6 +39,7 @@ studentnumber
   Board: string;
   Medium: string;
   Standard: string;
+  
   studentnumber: number;
 }) {
   return (
@@ -56,9 +58,12 @@ studentnumber
               <big style={{ textAlign: "center" }}>{name}</big>
             </WrapItem>
             <WrapItem>
-              <Badge colorScheme="green" borderRadius={"2xl"}>
-                Great School
-              </Badge>
+              <Link href={`/visitinstitute`}>
+                {" "}
+                <Badge colorScheme="green" borderRadius={"2xl"}>
+                  Visit my institute
+                </Badge>
+              </Link>
             </WrapItem>
             <WrapItem style={{ marginTop: "10px" }}>
               <FaMapMarkerAlt />
@@ -71,7 +76,8 @@ studentnumber
               <b style={{ textAlign: "center" }}>&nbsp;{email}</b>
             </WrapItem>
             <WrapItem style={{ marginTop: "10px" }}>
-              <FaPersonBooth />&nbsp;
+              <FaPersonBooth />
+              &nbsp;
               <b style={{ textAlign: "center" }}> {studentnumber} </b>
             </WrapItem>
             <WrapItem style={{ marginTop: "10px" }}>
