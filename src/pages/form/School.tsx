@@ -141,7 +141,8 @@ function formm() {
    }else{
     console.log("website is null");
    }
-    const location = checkurl(data.locationlink);
+   if(data.locationlink !== null){
+     const location = checkurl(data.locationlink);
     if (location) {
       data.locationlink = location;
     } else {
@@ -153,6 +154,8 @@ function formm() {
         isClosable: true,
       });
       return;
+    }}else{
+      console.log("locationlink is null");
     }
 
     let img_url;
