@@ -56,7 +56,7 @@ function formm() {
     });
     setTimeout(() => {
       Router.reload();
-    }, 3000);
+    }, 900);
 
     Router.push("/aboutcontest");
   };

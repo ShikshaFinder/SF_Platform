@@ -77,7 +77,7 @@ async function Harsh() {
 
     setTimeout(() => {
       Router.reload();
-    }, 2000);
+    }, 900);
     Router.push("/aboutcontest");
   };
 
