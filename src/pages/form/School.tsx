@@ -84,7 +84,7 @@ function formm() {
 
     setTimeout(() => {
       Router.reload();
-    }, 900);
+    }, 2000);
     Router.push("/aboutcontest");
   };
 
@@ -110,7 +110,9 @@ function formm() {
   };
 
   const onSubmit = async (data: any) => {
+
     const videoId = extractVideoId(data.videolink);
+
     if (videoId) {
       data.videolink = videoId;
     } else {
@@ -124,7 +126,8 @@ function formm() {
       });
       return;
     }
-   if(data.website !== null){
+
+   if(data.website !== ""){
     const website = checkurl(data.website);
     if (website) {
       data.website = website;
@@ -141,7 +144,7 @@ function formm() {
    }else{
     console.log("website is null");
    }
-   if(data.locationlink !== null){
+   if(data.locationlink !== ""){
      const location = checkurl(data.locationlink);
     if (location) {
       data.locationlink = location;
