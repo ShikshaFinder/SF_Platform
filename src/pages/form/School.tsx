@@ -55,26 +55,23 @@ function formm() {
     } else {
       return null;
     }
-  
   }
 
-  
-async function Harsh() {
-  try {
-    const { error } = await supabase
-      .from("votes")
-      .insert([{ user_id: user.id }]);
-  } catch (error) {
-    toast({
-      title: "Error",
-      description: (error as Error).message,
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-    });
+  async function Harsh() {
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ user_id: user.id }]);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: (error as Error).message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   }
-}
-
 
   const handleSubmitt = () => {
     toast({
@@ -119,30 +116,35 @@ async function Harsh() {
     } else {
       toast({
         title: "Error",
-        description: "Invalid YouTube video URL,please take link from youtube app",
+        description:
+          "Invalid YouTube video URL,please take link from youtube app",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    const url = checkurl(data.website);
-    if (url) {
-      data.website = url;
+   if(data.website !== null){
+    const website = checkurl(data.website);
+    if (website) {
+      data.website = website;
     } else {
       toast({
         title: "Error",
-        description: "Invalid Website URL",
+        description: "Invalid Website link",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
       return;
     }
+   }else{
+    console.log("website is null");
+   }
     const location = checkurl(data.locationlink);
     if (location) {
       data.locationlink = location;
-    }else{
+    } else {
       toast({
         title: "Error",
         description: "Invalid Google map link",
@@ -152,7 +154,6 @@ async function Harsh() {
       });
       return;
     }
-   
 
     let img_url;
     try {
@@ -305,11 +306,11 @@ async function Harsh() {
                 />
               </FormControl>
               <br />
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Website</FormLabel>
                 <Input
                   {...register("website", {
-                    required: true,
+                    required: false,
                   })}
                   name="website"
                   placeholder="https://example.com/"
