@@ -69,7 +69,7 @@ export default function Login() {
 
       setTimeout(() => {
         router.reload();
-      }, 900);
+      }, 2000);
       router.push("/form");
     } catch (error) {
       console.log(error);

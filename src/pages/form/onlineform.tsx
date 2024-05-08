@@ -46,6 +46,17 @@ function formm() {
       return null;
     }
   }
+
+   function checkurl(url: string) {
+     const prefix = "https://";
+     if (url.startsWith(prefix)) {
+       return url;
+     } else {
+       return null;
+     }
+   }
+
+
 async function Harsh() {
   try {
     const { error } = await supabase
@@ -72,7 +83,7 @@ async function Harsh() {
     });
     setTimeout(() => {
       Router.reload();
-    }, 900);
+    }, 2000);
 
     Router.push("/aboutcontest");
   };
@@ -98,6 +109,26 @@ async function Harsh() {
   };
 
   const onSubmit = async (data: any) => {
+
+    if (data.website !== "") {
+      const website = checkurl(data.website);
+      if (website) {
+        data.website = website;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Website link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+    } else {
+      console.log("website is null");
+    }
+
+
     const videoId = extractVideoId(data.videolink);
     if (videoId) {
       data.videolink = videoId;
