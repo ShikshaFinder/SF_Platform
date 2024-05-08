@@ -48,6 +48,16 @@ function formm() {
     }
   }
 
+  function checkurl(url: string) {
+    const prefix = "https://";
+    if (url.startsWith(prefix)) {
+      return url;
+    } else {
+      return null;
+    }
+  
+  }
+
   
 async function Harsh() {
   try {
@@ -109,13 +119,40 @@ async function Harsh() {
     } else {
       toast({
         title: "Error",
-        description: "Invalid YouTube video URL",
+        description: "Invalid YouTube video URL,please take link from youtube app",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
       return;
     }
+    const url = checkurl(data.website);
+    if (url) {
+      data.website = url;
+    } else {
+      toast({
+        title: "Error",
+        description: "Invalid Website URL",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    const location = checkurl(data.locationlink);
+    if (location) {
+      data.locationlink = location;
+    }else{
+      toast({
+        title: "Error",
+        description: "Invalid Google map link",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+   
 
     let img_url;
     try {
