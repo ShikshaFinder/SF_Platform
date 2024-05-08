@@ -8,7 +8,7 @@ export default function Success() {
     router.push(
       "https://api.whatsapp.com/send?phone=917984140706&text=Hi%2C%20i%20am%20interested%20in%20shiksha%20finder%27s%20marketing%20services%20and%20i%20want%20to%20complete%20the%20payment"
     );
-  }, 1000);
+  }, 4000);
   return (
     <Box textAlign="center" py={10} px={6}>
       <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
