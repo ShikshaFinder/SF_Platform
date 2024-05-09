@@ -266,7 +266,7 @@ function formm() {
                 <br />
                 <Input
                   {...register("locationlink", {
-                    required: true,
+                    required: false,
                   })}
                   name="locationlink"
                   placeholder="Google map link of school <in form of https only"

@@ -253,7 +253,7 @@ function formm() {
                 <br />
                 <Input
                   {...register("locationlink", {
-                    required: true,
+                    required: false,
                   })}
                   name="locationlink"
                   placeholder="Google map link of school <in form of https only"
@@ -305,7 +305,7 @@ function formm() {
                 <FormLabel>Website</FormLabel>
                 <Input
                   {...register("website", {
-                    required: true,
+                    required: false,
                   })}
                   name="website"
                   placeholder="https://example.com/"

@@ -282,7 +282,7 @@ function formm() {
               <FormControl isRequired>
                 <Input
                   {...register("locationlink", {
-                    required: true,
+                    required: false,
                   })}
                   name="locationlink"
                   placeholder="Google map link of skillclass"
@@ -341,7 +341,7 @@ function formm() {
               <FormControl isRequired>
                 <FormLabel>Website</FormLabel>
                 <Input
-                  {...register("website", { required: true })}
+                  {...register("website", { required: false })}
                   name="website"
                   placeholder="Website link"
                 />{" "}
