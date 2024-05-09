@@ -30,7 +30,6 @@ import { state } from "@/components/state";
 import { BlobServiceClient } from "@azure/storage-blob";
 import Nouser from "@/components/Nouser";
 
-
 function CoachingForm() {
   const Router = useRouter();
   const toast = useToast();
@@ -52,14 +51,14 @@ function CoachingForm() {
     }
   }
 
-   function checkurl(url: string) {
-     const prefix = "https://";
-     if (url.startsWith(prefix)) {
-       return url;
-     } else {
-       return null;
-     }
-   }
+  function checkurl(url: string) {
+    const prefix = "https://";
+    if (url.startsWith(prefix)) {
+      return url;
+    } else {
+      return null;
+    }
+  }
 
   const handleSubmitt = () => {
     toast({
@@ -93,42 +92,40 @@ function CoachingForm() {
   };
 
   const onSubmit = async (data: any) => {
-
- if (data.website !== "") {
-   const website = checkurl(data.website);
-   if (website) {
-     data.website = website;
-   } else {
-     toast({
-       title: "Error",
-       description: "Invalid Website link",
-       status: "error",
-       duration: 3000,
-       isClosable: true,
-     });
-     return;
-   }
- } else {
-   console.log("website is null");
- }
- if (data.locationlink !== "") {
-   const location = checkurl(data.locationlink);
-   if (location) {
-     data.locationlink = location;
-   } else {
-     toast({
-       title: "Error",
-       description: "Invalid Google map link",
-       status: "error",
-       duration: 3000,
-       isClosable: true,
-     });
-     return;
-   }
- } else {
-   console.log("locationlink is null");
- }
-
+    if (data.website !== "") {
+      const website = checkurl(data.website);
+      if (website) {
+        data.website = website;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Website link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+    } else {
+      console.log("website is null");
+    }
+    if (data.locationlink !== "") {
+      const location = checkurl(data.locationlink);
+      if (location) {
+        data.locationlink = location;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Google map link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+    } else {
+      console.log("locationlink is null");
+    }
 
     const videoId = extractVideoId(data.videolink);
     if (videoId) {

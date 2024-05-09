@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Img, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import Nouser from "@/components/Nouser";
@@ -9,6 +9,7 @@ interface State {
   districts: string[];
   state: string;
 }
+
 import {
   Button,
   FormControl,
