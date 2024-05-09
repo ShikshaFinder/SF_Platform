@@ -80,7 +80,7 @@ export default function Home() {
               <br />
               <link rel="stylesheet" href="/login" />
               <Text as={"span"} color={"blue.400"}>
-                इमानदार स्कूल की पहचान
+               Promote the quality of your education
               </Text>
             </Heading>
             <Text>
