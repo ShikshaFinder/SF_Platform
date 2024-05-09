@@ -233,9 +233,9 @@ try {
               </FormControl>
               <br />
               <FormControl isRequired>
-                <FormLabel>Discription</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <Textarea
-                  placeholder="discription of coaching class"
+                  placeholder="Description of coaching class"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"

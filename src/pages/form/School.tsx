@@ -239,9 +239,9 @@ function formm() {
               </FormControl>
               <br />
               <FormControl isRequired>
-                <FormLabel>Discription</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <Textarea
-                  placeholder="Discription of your school"
+                  placeholder="Description of your school"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"

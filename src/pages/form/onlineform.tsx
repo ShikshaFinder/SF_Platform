@@ -221,9 +221,9 @@ async function Harsh() {
               </FormControl>
               <br />
               <FormControl isRequired>
-                <FormLabel>Discription</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <Textarea
-                  placeholder="Discription of your platform"
+                  placeholder="Description of your platform"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"
