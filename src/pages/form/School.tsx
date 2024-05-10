@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, set } from "react-hook-form";
-import { Img, useToast } from "@chakra-ui/react";
+import { Text, useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import Nouser from "@/components/Nouser";
@@ -111,22 +111,24 @@ function formm() {
 
   const onSubmit = async (data: any) => {
 
-    const videoId = extractVideoId(data.videolink);
+    if(data.videolink !== ""){
+      const videoId = extractVideoId(data.videolink);
 
-    if (videoId) {
-      data.videolink = videoId;
-    } else {
-      toast({
-        title: "Error",
-        description:
-          "Invalid YouTube video URL,please take link from youtube app",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
+      if (videoId) {
+        data.videolink = videoId;
+      } else {
+        toast({
+          title: "Error",
+          description:
+            "Invalid YouTube video URL,please take link from youtube app",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+
     }
-
    if(data.website !== ""){
     const website = checkurl(data.website);
     if (website) {
@@ -442,11 +444,11 @@ function formm() {
                 <Input type="file" accept="image/*" onChange={handleImage} />
               </FormControl>{" "}
               <br />
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel> Introduction video Youtube video link</FormLabel>
-
+                <Text fontSize="xs">You can upload video later</Text>
                 <Input
-                  {...register("videolink", { required: true })}
+                  {...register("videolink", { required: false })}
                   name="videolink"
                   placeholder="enter the youtube video link"
                 />
