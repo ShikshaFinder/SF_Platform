@@ -15,13 +15,13 @@ import {
 } from "@chakra-ui/react";
 import supabase from "../../supabase";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const MagicLinkForm = () => {
   const [email, setEmail] = useState("");
   const toast = useToast();
-
+  const router = useRouter();
   async function signInWithEmail() {
-    console.log("signing in with email");
     const { data, error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
@@ -30,6 +30,7 @@ const MagicLinkForm = () => {
         emailRedirectTo: "https://platform.shikshafinder.com/",
       },
     });
+
     if (error) {
       console.log(error);
       toast({
@@ -40,7 +41,6 @@ const MagicLinkForm = () => {
         isClosable: true,
       });
     } else {
-      console.log(data);
       toast({
         title: "Success.",
         description: "Magic link sent to your email",
@@ -48,6 +48,7 @@ const MagicLinkForm = () => {
         duration: 5000,
         isClosable: true,
       });
+      router.push("/checkmail");
     }
   }
 
