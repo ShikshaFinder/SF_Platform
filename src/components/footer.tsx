@@ -110,7 +110,7 @@ export default function SmallCentered() {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recognised by{" "}
             </Text>
             <Image
-              src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=70"
+              src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=76"
               alt="startup india image shiksha finder"
               style={{ borderRadius: "5%" }}
               loading="lazy"
