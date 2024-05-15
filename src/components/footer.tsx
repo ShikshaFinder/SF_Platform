@@ -104,11 +104,10 @@ export default function SmallCentered() {
         >
           <a href="/gwsf">
             {" "}
-            <Text>© GWSF Ventures Pvt Ltd</Text>
-            <Text>
-              {" "}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recognised by{" "}
-            </Text>
+            <Stack direction={"column"} mx={"auto"} align={"center"}>
+              <Text>© GWSF Ventures Pvt Ltd</Text>
+              <Text> Recognised by </Text>
+            </Stack>
             <img
               src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=76"
               alt="startup india image shiksha finder"
