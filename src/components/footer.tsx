@@ -59,7 +59,7 @@ export default function SmallCentered() {
         justify={"center"}
         align={"center"}
       >
-        <Image
+        <img
           src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/1713029348785_sfv1.png&h=350"
           alt="Shiksha Finder Logo"
           className="Container"
@@ -67,7 +67,7 @@ export default function SmallCentered() {
           height={350}
           style={{ borderRadius: "5%" }}
           loading="lazy"
-        ></Image>
+        ></img>
         <Stack direction={"row"} spacing={6}>
           <Box as={Link} href={"/aboutcontest"}>
             contest
