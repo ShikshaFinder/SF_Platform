@@ -61,7 +61,7 @@ export default function SmallCentered() {
         align={"center"}
       >
         <Image
-          src="/icon-512x512.png"
+          src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/1713029348785_sfv1.png&h=300"
           alt="Shiksha Finder Logo"
           className="Container"
           width={200}
@@ -108,7 +108,10 @@ export default function SmallCentered() {
               {" "}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recognised by{" "}
             </Text>
-            <img src="/images.png" alt="startup india image shiksha finder" />
+            <img
+              src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=76"
+              alt="startup india image shiksha finder"
+            />
           </a>
           <Stack direction={"row"} spacing={6}>
             <SocialButton
