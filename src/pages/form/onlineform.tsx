@@ -47,31 +47,30 @@ function formm() {
     }
   }
 
-   function checkurl(url: string) {
-     const prefix = "https://";
-     if (url.startsWith(prefix)) {
-       return url;
-     } else {
-       return null;
-     }
-   }
-
-
-async function Harsh() {
-  try {
-    const { error } = await supabase
-      .from("votes")
-      .insert([{ user_id: user.id }]);
-  } catch (error) {
-    toast({
-      title: "Error",
-      description: (error as Error).message,
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-    });
+  function checkurl(url: string) {
+    const prefix = "https://";
+    if (url.startsWith(prefix)) {
+      return url;
+    } else {
+      return null;
+    }
   }
-}
+
+  async function Harsh() {
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ user_id: user.id }]);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: (error as Error).message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }
 
   const handleSubmitt = () => {
     toast({
@@ -109,7 +108,6 @@ async function Harsh() {
   };
 
   const onSubmit = async (data: any) => {
-
     if (data.website !== "") {
       const website = checkurl(data.website);
       if (website) {
@@ -128,8 +126,6 @@ async function Harsh() {
       console.log("website is null");
     }
 
-
-   
     if (data.videolink !== "") {
       const videoId = extractVideoId(data.videolink);
 
@@ -147,7 +143,7 @@ async function Harsh() {
         return;
       }
     }
-    
+
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
@@ -186,7 +182,7 @@ async function Harsh() {
         isClosable: true,
       });
     } else {
-      Harsh();  
+      await Harsh();
       handleSubmitt();
     }
   };

@@ -143,7 +143,6 @@ function formm() {
       console.log("locationlink is null");
     }
 
-   
     if (data.videolink !== "") {
       const videoId = extractVideoId(data.videolink);
 
@@ -199,7 +198,7 @@ function formm() {
         isClosable: true,
       });
     } else {
-      Harsh();
+      await Harsh();
       handleSubmitt();
     }
   };

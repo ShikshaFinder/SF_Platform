@@ -202,7 +202,7 @@ try {
         isClosable: true,
       });
     } else {
-      Harsh();
+      await Harsh();
       handleSubmitt();
     }
   };

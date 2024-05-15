@@ -110,8 +110,7 @@ function formm() {
   };
 
   const onSubmit = async (data: any) => {
-
-    if(data.videolink !== ""){
+    if (data.videolink !== "") {
       const videoId = extractVideoId(data.videolink);
 
       if (videoId) {
@@ -127,39 +126,39 @@ function formm() {
         });
         return;
       }
-
     }
-   if(data.website !== ""){
-    const website = checkurl(data.website);
-    if (website) {
-      data.website = website;
+    if (data.website !== "") {
+      const website = checkurl(data.website);
+      if (website) {
+        data.website = website;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Website link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
     } else {
-      toast({
-        title: "Error",
-        description: "Invalid Website link",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
+      console.log("website is null");
     }
-   }else{
-    console.log("website is null");
-   }
-   if(data.locationlink !== ""){
-     const location = checkurl(data.locationlink);
-    if (location) {
-      data.locationlink = location;
+    if (data.locationlink !== "") {
+      const location = checkurl(data.locationlink);
+      if (location) {
+        data.locationlink = location;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Google map link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
     } else {
-      toast({
-        title: "Error",
-        description: "Invalid Google map link",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
-    }}else{
       console.log("locationlink is null");
     }
 
@@ -202,7 +201,7 @@ function formm() {
         isClosable: true,
       });
     } else {
-      Harsh();
+      await Harsh();
       handleSubmitt();
     }
   };

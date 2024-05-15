@@ -87,10 +87,6 @@ export default function Login() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Alert status="warning">
-            <AlertIcon />
-            If you haven't signed up please do so before signing in
-          </Alert>
           <Heading fontSize={"4xl"} textAlign={"center"}>
             Sign In
           </Heading>
@@ -117,8 +113,11 @@ export default function Login() {
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e) => setEmail(e.target.value)} 
-              placeholder="example@example.com"/>
+              <Input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="example@example.com"
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
