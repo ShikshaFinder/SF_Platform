@@ -60,11 +60,11 @@ export default function SmallCentered() {
         align={"center"}
       >
         <Image
-          src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/1713029348785_sfv1.png&h=300"
+          src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/1713029348785_sfv1.png&h=350"
           alt="Shiksha Finder Logo"
           className="Container"
-          width={200}
-          height={300}
+          width={150}
+          height={350}
           style={{ borderRadius: "5%" }}
         ></Image>
         <Stack direction={"row"} spacing={6}>
@@ -109,7 +109,7 @@ export default function SmallCentered() {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recognised by{" "}
             </Text>
             <img
-              src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=76"
+              src="https://wsrv.nl/?url=https://blobimageshikshafinder.blob.core.windows.net/shikshafinder/images.png&h=70"
               alt="startup india image shiksha finder"
               style={{ borderRadius: "5%" }}
             />
