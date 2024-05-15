@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import supabase from "../../supabase";
+import { FcGoogle } from "react-icons/fc";
 import {
   Flex,
   Box,
@@ -15,6 +16,7 @@ import {
   Text,
   useColorModeValue,
   Link,
+  Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -87,6 +89,13 @@ export default function SignupCard() {
             to enjoy all of our cool features ✌️
           </Text>
         </Stack>
+        <Link href="https://qgkjakomwapzuhvnrvgr.supabase.co/auth/v1/authorize?provider=google">
+          <Button w={"full"} variant={"outline"} leftIcon={<FcGoogle />}>
+            <Center>
+              <Text>Sign up with Google</Text>
+            </Center>
+          </Button>
+        </Link>
         <Box
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
@@ -102,6 +111,7 @@ export default function SignupCard() {
                     type="text"
                     name="firstName"
                     onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Harsh"
                   />
                 </FormControl>
               </Box>
@@ -112,13 +122,18 @@ export default function SignupCard() {
                     name="lastName"
                     type="text"
                     onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Kumar"
                   />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+              <Input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="example@example.com"
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
@@ -126,6 +141,7 @@ export default function SignupCard() {
                 <Input
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Must be 6 characters long"
                 />
                 <InputRightElement h={"full"}>
                   <Button
@@ -162,33 +178,21 @@ export default function SignupCard() {
                 >
                   login
                 </Link>
-                <Link href="https://qgkjakomwapzuhvnrvgr.supabase.co/auth/v1/authorize?provider=google">
-                  &nbsp; &nbsp; &nbsp;{" "}
-                  <Button
-                    leftIcon={<FaGoogle />}
-                    colorScheme="blue"
-                    variant="outline"
-                    mt={4}
-                  >
-                    Sign up with Google
-                  </Button>
-                </Link>
               </Text>
             </Stack>
           </Stack>
         </Box>
         <Text>
           By continuing you agree to our{" "}
-          <a
-            href="https://platform.shikshafinder.com/privacypolicy"
-            // style={{color: "blue"}}
-          >
-            Privacy Policy
-          </a>{" "}
-          &{" "}
-          <a href="https://platform.shikshafinder.com/termsofservice">
-            Terms of Service
-          </a>
+          <Stack align={"center"} direction={"row"}>
+            <a href="https://platform.shikshafinder.com/privacypolicy">
+              <Text color={"blue.400"}>Privacy Policy</Text>
+            </a>{" "}
+            <Text>and</Text>{" "}
+            <a href="https://platform.shikshafinder.com/termsofservice">
+              <Text color={"blue.400"}>Terms of Service</Text>
+            </a>
+          </Stack>
         </Text>
       </Stack>
     </Flex>
