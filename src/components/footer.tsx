@@ -141,9 +141,14 @@ export default function SmallCentered() {
               <FaLinkedin />
             </SocialButton>
           </Stack>
-          <Box height={"19"}></Box>
         </Container>
       </Box>
+      <Box
+        height={{
+          base: "50px",
+          md: "10px",
+        }}
+      ></Box>
     </Box>
   );
 }
