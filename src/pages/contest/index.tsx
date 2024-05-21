@@ -38,21 +38,8 @@ function contest() {
         />
 
         <Stack>
-          <CardBody>
-            <Heading size="md">Than you are on a Gold Mine</Heading>
-
-            <Text py="3" as="b">
-              Share this link to your students and  get chance to win prizes worth thousands !
-              <br />
-              <b>
-                Participate in the contest and show the strength you have 💪{" "}
-              </b>
-            </Text>
-            <Text py="3" size={"3xl"}>
-              Share this Links to your students{" "}
-            </Text>
-          </CardBody>
           {/* calll to action */}
+          <Heading size="md"> &nbsp; Than you are on a Gold Mine !</Heading>
           <CardFooter>
             {useUse && useUse.user_id ? (
               <Copybutton schoolName={useUse.user_id} />
@@ -84,6 +71,19 @@ function contest() {
               </>
             )}
           </CardFooter>
+          <CardBody>
+            <Text py="3" as="b">
+              Share this link to your students and get chance to win prizes
+              worth thousands !
+              <br />
+              <b>
+                Participate in the contest and show the strength you have 💪{" "}
+              </b>
+            </Text><br /><br /><br />
+            <Text py="3" size={"3xl"} as="b">
+              Get assured prices by participating{" "}🚀
+            </Text>
+          </CardBody>
         </Stack>
       </Card>
 

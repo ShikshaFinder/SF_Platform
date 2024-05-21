@@ -50,7 +50,7 @@ export default function Navbar() {
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
-          <Show breakpoint="(max-width: 400px)">
+          <Show breakpoint="(max-width: 480px)">
             <ThemeButton />
           </Show>
         </Flex>
