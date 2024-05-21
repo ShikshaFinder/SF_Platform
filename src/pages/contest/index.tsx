@@ -41,11 +41,8 @@ function contest() {
           <CardBody>
             <Heading size="md">Than you are on a Gold Mine</Heading>
 
-            <Text py="3">
-              According to the Annual Status of Education Report (ASER) 2019,
-              which surveyed rural households in India, only around 50% of
-              students in the age group of 14-18 years were satisfied with their
-              schools.
+            <Text py="3" as="b">
+              Share this link to your students and  get chance to win prizes worth thousands !
               <br />
               <b>
                 Participate in the contest and show the strength you have 💪{" "}
@@ -62,6 +59,7 @@ function contest() {
             ) : (
               <>
                 <Button
+                  colorScheme="teal"
                   onClick={() => {
                     router.push("/form");
                   }}
@@ -74,7 +72,16 @@ function contest() {
             {useUse && useUse.user_id ? (
               <Whatsapp schoolName={useUse.user_id} />
             ) : (
-              <></>
+              <>
+                {" "}
+                <Button
+                  onClick={() => {
+                    router.push("/aboutcontest");
+                  }}
+                >
+                  Know more
+                </Button>{" "}
+              </>
             )}
           </CardFooter>
         </Stack>
