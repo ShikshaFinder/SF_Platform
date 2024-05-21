@@ -81,18 +81,22 @@ const StatsWithIcons = () => {
   }, [user]);
 
   const fetchBannerAdView = async () => {
-    const { data, error } = await supabase
-      .from("banneradview")
-      .select("view")
-      .eq("user_id", useUse.user_id);
-    // .eq("District", user?.Board)
-    //percentage * rating
+    if (useUse !== null) {
+      const { data, error } = await supabase
+        .from("banneradview")
+        .select("view")
+        .eq("user_id", useUse.user_id);
 
-    setView(data);
-    if (error) {
-      console.error("Error fetching leaderboard data:", error);
-    } else {
-      console.log(data);
+      // .eq("District", user?.Board)
+      //percentage * rating
+
+      setView(data);
+
+      if (error) {
+        console.error("Error fetching leaderboard data:", error);
+      } else {
+        console.log(data);
+      }
     }
   };
 

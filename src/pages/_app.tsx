@@ -1,4 +1,5 @@
 import {
+  Box,
   ChakraProvider,
   extendTheme,
   ThemeConfig,
@@ -57,6 +58,7 @@ export default function App({
               <Navbar />
             </div>
             <Component {...pageProps} />
+            <Box height={"50px"}></Box>
           </AuthContextProvider>
         </ChakraProvider>
       </SessionContextProvider>

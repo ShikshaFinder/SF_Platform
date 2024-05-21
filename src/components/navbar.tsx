@@ -1,34 +1,39 @@
 import Link from "next/link";
 import {
+  FaWpforms,
+  FaCloudUploadAlt,
+  FaPaintBrush,
+  FaAward,
+  FaBullhorn,
+} from "react-icons/fa";
+import ThemeButton from "@/components/ThemeButton";
+import { Show } from "@chakra-ui/react";
+
+
+import {
   Box,
   Flex,
   Text,
-  IconButton,
   Button,
   Stack,
-  Collapse,
   Icon,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
-  useDisclosure,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { useStore } from "../../store";
 import { useAuthContext } from "@/context";
 
 export default function Navbar() {
+  const isMobileNav = useBreakpointValue({ base: true, md: false });
   const { user } = useAuthContext();
-  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
+      {" "}
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -45,22 +50,18 @@ export default function Navbar() {
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
+          <Show breakpoint="(max-width: 400px)">
+            <ThemeButton />
+          </Show>
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
+            color={useColorModeValue("gray.900", "white")}
+            fontSize="inherit"
           >
-            <Link href={"/"}> Shiksha Finder</Link>
+            <Link href={"/"}>ShikshaFinder</Link>
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
@@ -75,16 +76,24 @@ export default function Navbar() {
           spacing={6}
         >
           {user && user.email ? (
-            <Button
-              as={Link}
-              href={"/profile"}
-              passHref
-              fontSize={"sm"}
-              fontWeight={400}
-              variant={"link"}
-            >
-              Profile
-            </Button>
+            <>
+              <Button
+                as={Link}
+                href={"/profile"}
+                passHref
+                fontSize={"sm"}
+                fontWeight={400}
+                variant={"link"}
+              >
+                Profile
+              </Button>
+
+              <Show above="sm">
+                <Show breakpoint="(min-width: 400px)">
+                  <ThemeButton />
+                </Show>
+              </Show>
+            </>
           ) : (
             <>
               <Button
@@ -116,9 +125,7 @@ export default function Navbar() {
           )}
         </Stack>
       </Flex>
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      <Box>{isMobileNav ? <MobileNav /> : null}</Box>
     </Box>
   );
 }
@@ -136,7 +143,7 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Box
                 as={Link}
-                href={navItem.href ?? "/form"}
+                href={navItem.href ?? "../form"}
                 passHref
                 p={2}
                 fontSize={"sm"}
@@ -214,70 +221,95 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 };
 
 const MobileNav = () => {
+  const handleClick = (iconName: string) => {
+    useStore.getState().setSelectedIcon(iconName);
+  };
+  const boxColor = useColorModeValue("gray.100", "gray.800");
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-};
-
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <>
       <Box
-        py={2}
-        as={Link}
-        href={href ?? "/form"}
-        passHref
-        justifyContent="space-between"
-        alignItems="center"
-        _hover={{
-          textDecoration: "none",
-        }}
+        position="fixed"
+        bottom={0}
+        left={0}
+        right={0}
+        p={4}
+        bg={boxColor}
+        zIndex={10}
+        borderTopWidth="1px"
+        borderColor="gray"
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
+        <Flex
+          direction={["row", "row"]}
+          wrap="wrap"
+          justify="space-around"
+          align="center"
         >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(180deg)" : ""}
-            w={6}
-            h={6}
-          />
-        )}
+          <Link href={"/form"}>
+            <FaWpforms
+              size={15}
+              color={
+                useStore.getState().selectedIcon === "form" ? "blue" : "initial"
+              }
+              style={{ marginInline: "auto" }}
+              onClick={() => handleClick("form")}
+            />
+            <Text fontSize={"xs"}>create</Text>
+          </Link>
+          <Link href={"/uploadDemolecture"}>
+            <FaCloudUploadAlt
+              size={15}
+              color={
+                useStore.getState().selectedIcon === "upload"
+                  ? "blue"
+                  : "initial"
+              }
+              style={{ marginInline: "auto" }}
+              onClick={() => handleClick("upload")}
+            />
+            <Text fontSize={"xs"}>upload</Text>
+          </Link>
+          <Link href={"/contest"}>
+            <FaAward
+              size={15}
+              color={
+                useStore.getState().selectedIcon === "contest"
+                  ? "blue"
+                  : "initial"
+              }
+              style={{ marginInline: "auto" }}
+              onClick={() => handleClick("contest")}
+            />
+            <Text fontSize={"xs"}>contest</Text>
+          </Link>
+          <Link href={"/marketing"}>
+            <FaBullhorn
+              size={15}
+              color={
+                useStore.getState().selectedIcon === "marketing"
+                  ? "blue"
+                  : "initial"
+              }
+              style={{ marginInline: "auto" }}
+              onClick={() => handleClick("marketing")}
+            />{" "}
+            <Text fontSize={"xs"}>marketing</Text>
+          </Link>
+          <Link href={"/analytics"}>
+            <FaPaintBrush
+              size={15}
+              color={
+                useStore.getState().selectedIcon === "analytics"
+                  ? "blue"
+                  : "initial"
+              }
+              style={{ marginInline: "auto" }}
+              onClick={() => handleClick("analytics")}
+            />{" "}
+            <Text fontSize={"xs"}>analytics</Text>
+          </Link>
+        </Flex>
       </Box>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
-          {children &&
-            children.map((child) => (
-              <Box as={Link} key={child.label} href={child.href} passHref>
-                <Box py={2}>{child.label}</Box>
-              </Box>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+    </>
   );
 };
 
@@ -293,7 +325,7 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Create & Edit your platform",
     children: [
       {
-        label: "Create & Edit Your platform",
+        label: "Create & Edit your platform",
         subLabel: "Let the world know the quality of your education",
         href: "/form",
       },
