@@ -33,7 +33,7 @@ const testimonials = [
     avatar: avatar,
   },
   {
-    name: "Maria Institute, Isanpur",
+    name: "Computer technology foundation",
     role: "Principal",
     content:
       "I'm impressed with Shiksha Finder's ability to streamline the school selection process. It's an invaluable resource for students and parents alike.",
