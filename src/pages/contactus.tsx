@@ -158,7 +158,7 @@ const Contact = () => {
                 })}
                 name="Subject"
                 type="text"
-                placeholder="Are you available for freelance work?"
+                placeholder="What is shiksha finder?"
                 rounded="md"
               />
             </FormControl>

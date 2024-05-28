@@ -197,7 +197,7 @@ const Parent = () => {
               Shiksha Finder Lectures <ExternalLinkIcon mx="2px" />
             </Link>
             <br /> <b>Leverage the Power of Shiksha Finder</b>This website is a
-            game-changer for educators! Upload your demo lectures for free,
+            game-changer for educators! Upload your demo lectures,
             reaching a wider audience of students actively searching for the
             perfect course. Plus, you can showcase your educational platform and
             attract potential enrolments. Think of it as your online storefront
