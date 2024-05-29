@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Stack, AspectRatio, Box } from "@chakra-ui/react";
-import supabase from "../../../supabase";
+import { Button, Stack, AspectRatio, Box, Toast } from "@chakra-ui/react";
+import supabase from "../../supabase";
 import { useRouter } from "next/router";
-import { useUser } from "../../../store";
+import { useUser } from "../../store";
+import { useToast } from "@chakra-ui/react";
 
 function form() {
   const router = useRouter();
@@ -20,6 +21,14 @@ function form() {
       });
     } catch (error) {
       console.log(error);
+        Toast({
+            title: "Error",
+            description: "Error in updating the user data. Please try again.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            });
+
     }
     router.push("form/" + institute);
   }
