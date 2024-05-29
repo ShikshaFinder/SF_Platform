@@ -322,7 +322,7 @@ try {
                 />
               </FormControl>{" "}
               <br />
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel> website</FormLabel>
                 <Input
                   {...register("website", { required: false })}
