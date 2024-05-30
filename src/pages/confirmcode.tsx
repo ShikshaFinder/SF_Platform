@@ -18,7 +18,7 @@ const HeroSection = () => {
     const Toast = useToast();
   function Check() {
     if (
-      Code === "FederationAhmedabad2024" ||
+      Code === "FederationGujarat2024" ||
       Code === "AssociationBhavnagar2024"
     ) {
       router.push("/formm");
