@@ -44,7 +44,7 @@ export default function Home() {
       <Head>
         <meta
           name="ShikshaFinder"
-          content="Shiksha Finder,schools,how to Market my educational platform,what is the best way of marketing your educational platform?,schools near me,advertiisment schools"
+          content="Shiksha Finder,schools,how to Market my educational platform,what is the best way of marketing your educational platform?,schools near me,advertiisment schools,shiksha finder for schools ,shiksha finder for educationalplatforms"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
