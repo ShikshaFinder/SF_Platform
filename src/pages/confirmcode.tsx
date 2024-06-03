@@ -19,7 +19,7 @@ const HeroSection = () => {
   function Check() {
     if (
       Code === "FederationGujarat2024" ||
-      Code === "AssociationBhavnagar2024"
+      Code === "AssociationBhavnagar2024" || Code === "ShreeSwami2024"
     ) {
       router.push("/formm");
         Toast({
