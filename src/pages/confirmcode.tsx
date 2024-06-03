@@ -8,7 +8,6 @@ import {
   Box,
   Input,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icons
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
 
