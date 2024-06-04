@@ -18,18 +18,20 @@ const HeroSection = () => {
   function Check() {
     if (
       Code === "FederationGujarat2024" ||
-      Code === "AssociationBhavnagar2024" || Code === "ShreeSwami2024"
+      Code === "AssociationBhavnagar2024" ||
+      Code === "ShreeSwami2024" ||
+      Code === "SFGUEST2024"
     ) {
       router.push("/formm");
-        Toast({
-          title: "success",
-          description: "Welcome to the Shiksha Finder's special guest programme 🚀",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
+      Toast({
+        title: "success",
+        description:
+          "Welcome to the Shiksha Finder's special guest programme 🚀",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } else {
-
       Toast({
         title: "Error",
         description: "Please enter the correct code",
