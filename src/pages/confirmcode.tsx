@@ -20,7 +20,7 @@ const HeroSection = () => {
       Code === "FederationGujarat2024" ||
       Code === "AssociationBhavnagar2024" ||
       Code === "ShreeSwami2024" ||
-      Code === "SFGUEST2024"
+      Code === "SFGUEST2024" || Code === "CoachingAssociationBhavnagar2024" || Code === "BhavnagarAssociationSchool2024"
     ) {
       router.push("/formm");
       Toast({
