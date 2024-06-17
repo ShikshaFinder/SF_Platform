@@ -48,6 +48,31 @@ function Profile() {
       </Button>
     );
   });
+  let institute;
+  if (user && user.user_metadata && user.user_metadata.lastName === "School") {
+    institute = "school";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "coaching"
+  ) {
+    institute = "coaching";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "onlineform"
+  ) {
+    institute = "onlineform";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "skillclass"
+  ) {
+    institute = "skillclass";
+  } else {
+    console.log("error");
+  }
+  
 
   return (
     <>
@@ -60,15 +85,23 @@ function Profile() {
           <TabPanel>
             {" "}
             <Profilee
-              name={useUse?.schoolname || useUse?.coachingname || useUse?.skillclassname || "Your Name"}
+              name={
+                useUse?.schoolname ||
+                useUse?.coachingname ||
+                useUse?.skillclassname ||
+                "Your Name"
+              }
               email={useUse?.email || "youmail@gmail.com"}
               state={useUse?.State || useUse?.website || "your state"}
               Board={useUse?.Board || useUse?.skilltype || "GSEB"}
               Medium={useUse?.medium || "English"}
-              Standard={useUse?.Standard ||  useUse?.subdistrict || "10th"}
+              Standard={useUse?.Standard || useUse?.subdistrict || "10th"}
               city={useUse?.District || useUse?.city || "Ahmedabad"}
-              studentnumber={useUse?.studentnumber || useUse?.mobile || useUse?.mobile1 ||0}
-             
+              studentnumber={
+                useUse?.studentnumber || useUse?.mobile || useUse?.mobile1 || 0
+              }
+              institute={institute || "onlineplatforms"}
+              userid={useUse?.user_id || "99ac208f-a72e-4221-9ea0-905e62bccd53"}
             />
           </TabPanel>
           <TabPanel>

@@ -29,8 +29,9 @@ function profile({
   Board,
   Medium,
   Standard,
-studentnumber,
-
+  studentnumber,
+  institute,
+  userid,
 }: {
   name: string;
   city: string;
@@ -39,8 +40,9 @@ studentnumber,
   Board: string;
   Medium: string;
   Standard: string;
-  
+  institute: string;
   studentnumber: number;
+  userid: string;
 }) {
   return (
     <Container justifyContent={"center"}>
@@ -58,7 +60,7 @@ studentnumber,
               <big style={{ textAlign: "center" }}>{name}</big>
             </WrapItem>
             <WrapItem>
-              <Link href={`/visitinstitute`}>
+              <Link href={`https://shikshafinder.com/${institute}/${userid}`}>
                 {" "}
                 <Badge colorScheme="green" borderRadius={"2xl"}>
                   Visit my institute

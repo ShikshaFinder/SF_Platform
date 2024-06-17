@@ -13,6 +13,8 @@ import {
   Card,
   Toast,
 } from "@chakra-ui/react";
+import * as htmlToImage from "html-to-image";
+
 import QRCode from "react-qr-code";
 import React, { useRef } from "react";
 import { useAuthContext } from "@/context";
@@ -27,7 +29,23 @@ export default function CallToActionWithIllustration() {
   function addInstitutionn(institute: string) {
     router.push("updateprofile/" + institute);
   }
-  // console.log(useUse.user.user_id);
+//   const qrCodeRef = useRef(null);
+// const element = document.getElementById("123456") as HTMLElement;
+
+  // const downloadQRCode = () => {
+  //   if (element !== null) {
+  //   htmlToImage
+  //     .toPng(qrCodeRef.current)
+  //     .then(function (dataUrl) {
+  //       const link = document.createElement("a");
+  //       link.href = dataUrl;
+  //       link.download = "qr-code.png";
+  //       link.click();
+  //     })} else {
+  //       console.log("error");
+  //     }
+      
+  // };
   let institute;
   if (user && user.user_metadata && user.user_metadata.lastName === "School") {
     institute = "school";
@@ -96,6 +114,7 @@ export default function CallToActionWithIllustration() {
               maxWidth: 100,
               width: "100%",
             }}
+            className="qrcode__image"
           >
             QR Code of your institute <br />
             <QRCode
@@ -103,8 +122,17 @@ export default function CallToActionWithIllustration() {
               style={{ height: "auto", maxWidth: "100%", width: "100%" }}
               value={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
               viewBox={`0 0 256 256`}
+              id="123456"
             />
+            {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
           </div>
+          <br />
+      <Stack spacing={6} direction="column" align="center">
+        {" "}    <Link
+            href={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
+          >
+            <Button colorScheme="linkedin">Visit my institute ↗️</Button>
+          </Link></Stack>
         </Card>
         <br />
         <Box display="flex" justifyContent="center" alignItems="center">
