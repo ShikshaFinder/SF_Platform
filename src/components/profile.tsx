@@ -42,7 +42,7 @@ function profile({
   Standard: string;
   institute: string;
   studentnumber: number;
-  userid: string;
+  userid: any;
 }) {
   return (
     <Container justifyContent={"center"}>
