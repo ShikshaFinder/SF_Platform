@@ -33,16 +33,16 @@ function profile({
   institute,
   userid,
 }: {
-  name: string;
-  city: string;
-  state: string;
-  email: string;
-  Board: string;
-  Medium: string;
-  Standard: string;
-  institute: string;
-  studentnumber: number;
-  userid: any;
+  name?: string;
+  city?: string;
+  state?: string;
+  email?: string;
+  Board?: string;
+  Medium?: string;
+  Standard?: string;
+  institute?: string;
+  studentnumber?: number;
+  userid?: any;
 }) {
   return (
     <Container justifyContent={"center"}>
