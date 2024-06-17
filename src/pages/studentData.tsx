@@ -53,9 +53,6 @@ function studentData() {
               email={admissionform.email}
               name={admissionform.name}
               state={admissionform.state}
-              studentnumber={0}
-              institute={""}
-              userid={""}
             />
           )
         )}
