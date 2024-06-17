@@ -10,7 +10,12 @@ import {
   IconProps,
   Box,
   AspectRatio,
+  Card,
+  Toast,
 } from "@chakra-ui/react";
+import QRCode from "react-qr-code";
+import React, { useRef } from "react";
+import { useAuthContext } from "@/context";
 
 import { useUser } from "../../../store";
 import { useRouter } from "next/router";
@@ -18,8 +23,34 @@ import { useRouter } from "next/router";
 export default function CallToActionWithIllustration() {
   const useUse = useUser();
   const router = useRouter();
+  const { user } = useAuthContext();
   function addInstitutionn(institute: string) {
     router.push("updateprofile/" + institute);
+  }
+  // console.log(useUse.user.user_id);
+  let institute;
+  if (user && user.user_metadata && user.user_metadata.lastName === "School") {
+    institute = "school";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "coaching"
+  ) {
+    institute = "coaching";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "onlineform"
+  ) {
+    institute = "onlineform";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "skillclass"
+  ) {
+    institute = "skillclass";
+  } else {
+    console.log("error");
   }
   if (useUse.user !== null) {
     return (
@@ -56,6 +87,25 @@ export default function CallToActionWithIllustration() {
           </Button>
         </Stack>
         <br />
+        <br />
+        <Card variant={"elevated"}>
+          <div
+            style={{
+              height: "auto",
+              margin: "0 auto",
+              maxWidth: 100,
+              width: "100%",
+            }}
+          >
+            QR Code of your institute <br />
+            <QRCode
+              size={256}
+              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+              value={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
+              viewBox={`0 0 256 256`}
+            />
+          </div>
+        </Card>
         <br />
         <Box display="flex" justifyContent="center" alignItems="center">
           <Box
@@ -100,7 +150,9 @@ export default function CallToActionWithIllustration() {
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
-        Promote the quality of your education with shiksha finder , a platform that helps you to reach out to the students and parents in a more efficient way.
+          Promote the quality of your education with shiksha finder , a platform
+          that helps you to reach out to the students and parents in a more
+          efficient way.
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Link href="/paysf">
