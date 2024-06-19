@@ -1,5 +1,5 @@
 // "use client";
-import { Container } from "@chakra-ui/react";
+import { Button, Container } from "@chakra-ui/react";
 import React from "react";
 import {
   Avatar,
@@ -62,9 +62,9 @@ function profile({
             <WrapItem>
               <Link href={`https://shikshafinder.com/${institute}/${userid}`}>
                 {" "}
-                <Badge colorScheme="green" borderRadius={"2xl"}>
+                <Button colorScheme="green" borderRadius={"2xl"} size="sm">
                   Visit my institute
-                </Badge>
+                </Button>
               </Link>
             </WrapItem>
             <WrapItem style={{ marginTop: "10px" }}>
