@@ -71,8 +71,10 @@ export default function Login() {
 
       setTimeout(() => {
         router.reload();
-      }, 2000);
-      router.push("/form");
+      }, 3000);
+      setTimeout(() => {
+        router.push("/form");
+      }, 1000);
     } catch (error) {
       console.log(error);
     }

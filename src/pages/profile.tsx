@@ -96,7 +96,7 @@ function Profile() {
               Board={useUse?.Board || useUse?.skilltype || "GSEB"}
               Medium={useUse?.medium || "English"}
               Standard={useUse?.Standard || useUse?.subdistrict || "10th"}
-              city={useUse?.District || useUse?.city || "Ahmedabad"}
+              city={useUse?.District || useUse?.city || "Your City"}
               studentnumber={
                 useUse?.studentnumber || useUse?.mobile || useUse?.mobile1 || 0
               }

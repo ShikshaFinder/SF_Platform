@@ -21,6 +21,8 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import Link from "next/link";
+import { useUser } from "../../store";
+import { useRouter } from "next/router";
 function profile({
   name,
   city,
@@ -44,6 +46,8 @@ function profile({
   studentnumber?: number;
   userid?: any;
 }) {
+  const useUse = useUser((state) => state.user);
+  const router = useRouter();
   return (
     <Container justifyContent={"center"}>
       <Card>
@@ -60,12 +64,25 @@ function profile({
               <big style={{ textAlign: "center" }}>{name}</big>
             </WrapItem>
             <WrapItem>
-              <Link href={`https://shikshafinder.com/${institute}/${userid}`}>
-                {" "}
-                <Button colorScheme="green" borderRadius={"2xl"} size="sm">
-                  Visit my institute
-                </Button>
-              </Link>
+              {useUse && useUse.user_id ? (
+                <Link href={`https://shikshafinder.com/${institute}/${userid}`}>
+                  {" "}
+                  <Button colorScheme="green" borderRadius={"2xl"} size="sm">
+                    Visit my institute
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Button
+                    colorScheme="teal"
+                    onClick={() => {
+                      router.push("/form");
+                    }}
+                  >
+                    Register platform
+                  </Button>
+                </>
+              )}
             </WrapItem>
             <WrapItem style={{ marginTop: "10px" }}>
               <FaMapMarkerAlt />
