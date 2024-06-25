@@ -162,8 +162,8 @@ function marketingDetail() {
               Let's promote the quality of education 🚀
             </Heading>
             <br />
-            <FormControl 
-              <FormLabel> Name of platform</FormLabel>
+            <FormControl isRequired>
+              <FormLabel>Name of platform</FormLabel>
               <Input
                 {...register("name", { required: true })}
                 name="name"
