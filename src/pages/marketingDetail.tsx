@@ -122,6 +122,17 @@ function marketingDetail() {
       });
       return;
     }
+     const examplePromise = new Promise((resolve, reject) => {
+       setTimeout(() => resolve(200), 5000);
+     });
+
+     // Will display the loading toast until the promise is either resolved
+     // or rejected.
+     toast.promise(examplePromise, {
+       success: { title: "Promise resolved", description: "Looks great" },
+       error: { title: "Promise rejected", description: "Something wrong" },
+       loading: { title: "Your ad is being created on shikshafinder", description: "Please wait" },
+     });
     const { error } = await supabase
       .from("marketingDetails")
       .insert([{ ...data, user_id: user.id, img: img_url }]);
@@ -137,6 +148,7 @@ function marketingDetail() {
         isClosable: true,
       });
     } else {
+      
       handleSubmitt();
     }
   };
