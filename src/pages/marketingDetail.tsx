@@ -162,6 +162,15 @@ function marketingDetail() {
               Let's promote the quality of education 🚀
             </Heading>
             <br />
+            <FormControl 
+              <FormLabel> Name of platform</FormLabel>
+              <Input
+                {...register("name", { required: true })}
+                name="name"
+                placeholder="Name of your platform"
+              />
+            </FormControl>
+            <br />
             <FormControl isRequired>
               <FormLabel>State</FormLabel>
               <Select
