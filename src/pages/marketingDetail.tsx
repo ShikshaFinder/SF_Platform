@@ -131,7 +131,7 @@ function marketingDetail() {
      toast.promise(examplePromise, {
        success: { title: "Promise resolved", description: "Looks great" },
        error: { title: "Promise rejected", description: "Something wrong" },
-       loading: { title: "Your ad is being created on shikshafinder", description: "Please wait" },
+       loading: { title: "Your ad is being created on shikshafinder", description: "Please wait for sometime" },
      });
     const { error } = await supabase
       .from("marketingDetails")
