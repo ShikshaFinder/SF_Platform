@@ -29,14 +29,14 @@ function form() {
         <Button
           colorScheme="teal"
           size="md"
-          onClick={() => addInstitutionn("coachingclass")}
+          onClick={() => addInstitutionn("coaching")}
         >
           Update Coaching Center Informtion🏢
         </Button>
         <Button
           colorScheme="teal"
           size="md"
-          onClick={() => addInstitutionn("onlinePlatform")}
+          onClick={() => addInstitutionn("onlineform")}
         >
           Update Online Platform Informtion🌎
         </Button>

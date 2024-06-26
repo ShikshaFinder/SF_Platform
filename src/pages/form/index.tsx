@@ -49,7 +49,7 @@ export default function CallToActionWithIllustration() {
     }
   };
 
-  let institute;
+  let institute = "school";
   if (user && user.user_metadata && user.user_metadata.lastName === "School") {
     institute = "school";
   } else if (
@@ -78,34 +78,15 @@ export default function CallToActionWithIllustration() {
       <>
         <Stack spacing={6} direction="column" align="center">
           {" "}
-          <Button
-            colorScheme="teal"
-            size="md"
-            onClick={() => addInstitutionn("school")}
-          >
-            Update School Informtion🏫
+          <Button size="md" onClick={() => addInstitutionn(institute)}>
+            Update {institute} Informtion🏫
           </Button>{" "}
-          <Button
-            colorScheme="teal"
-            size="md"
-            onClick={() => addInstitutionn("coachingclass")}
-          >
-            Update Coaching Center Informtion🏢
-          </Button>
-          <Button
-            colorScheme="teal"
-            size="md"
-            onClick={() => addInstitutionn("onlinePlatform")}
-          >
-            Update Online Platform Informtion🌎
-          </Button>
-          <Button
-            colorScheme="teal"
-            size="md"
-            onClick={() => addInstitutionn("skillclass")}
-          >
-            Update Skill Class Informtion 🎨
-          </Button>
+          <Link href="/uploadDemolecture">
+            {" "}
+            <Button colorScheme="teal" size="md">
+              Upload Demo Lectures
+            </Button>{" "}
+          </Link>
         </Stack>
         <br />
         <br />
@@ -117,9 +98,20 @@ export default function CallToActionWithIllustration() {
               maxWidth: 100,
               width: "100%",
             }}
-            className="qrcode__image"
+            
           >
-            QR Code of your institute <br />
+            {" "}
+            <Text > QR Code of your institute</Text>{" "}
+          </div>
+          <div
+            style={{
+              height: "auto",
+              margin: "0 auto",
+              maxWidth: 100,
+              width: "100%",
+            }}
+          >
+            <br />
             <div id="123456">
               <QRCode
                 size={256}
@@ -137,7 +129,7 @@ export default function CallToActionWithIllustration() {
             justifyContent={"center"}
           >
             {" "}
-            <Button onClick={downloadQRCode} colorScheme="linkedin">
+            <Button onClick={downloadQRCode} colorScheme="blue">
               <DownloadIcon />
             </Button>
             <Link
