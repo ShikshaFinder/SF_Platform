@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import supabase from "../../supabase";
 import Nouser from "@/components/Nouser";
 import {
@@ -13,6 +13,7 @@ import {
   Select,
   useToast,
 } from "@chakra-ui/react";
+import { BeatLoader } from "react-spinners";
 import { state } from "@/components/state";
 import { useRouter } from "next/router";
 import { useAuthContext } from "@/context";
@@ -39,7 +40,7 @@ function marketingDetail() {
   const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
-
+  const[show,setShow]=useState(false);
   if (!user.email) {
     return <Nouser />;
   }
@@ -63,6 +64,7 @@ function marketingDetail() {
       duration: 3000,
       isClosable: true,
     });
+   
     Router.push("/paynow");
   };
 
@@ -84,6 +86,7 @@ function marketingDetail() {
   };
 
   const onSubmit = async (data: any) => {
+     setShow(true);
     const videoId = extractVideoId(data.videolink);
     if (videoId) {
       data.videolink = videoId;
@@ -95,6 +98,7 @@ function marketingDetail() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
 
@@ -110,6 +114,7 @@ function marketingDetail() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     if (!img_url) {
@@ -120,19 +125,9 @@ function marketingDetail() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
-     const examplePromise = new Promise((resolve, reject) => {
-       setTimeout(() => resolve(200), 5000);
-     });
-
-     // Will display the loading toast until the promise is either resolved
-     // or rejected.
-     toast.promise(examplePromise, {
-       success: { title: "Promise resolved", description: "Looks great" },
-       error: { title: "Promise rejected", description: "Something wrong" },
-       loading: { title: "Your ad is being created on shikshafinder", description: "Please wait for sometime" },
-     });
     const { error } = await supabase
       .from("marketingDetails")
       .insert([{ ...data, user_id: user.id, img: img_url }]);
@@ -147,8 +142,8 @@ function marketingDetail() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     } else {
-      
       handleSubmitt();
     }
   };
@@ -305,13 +300,23 @@ function marketingDetail() {
               />
             </FormControl>{" "}
             <br />
-            <Button
-              colorScheme="teal"
-              size="md"
-              onClick={handleSubmit(onSubmit)}
-            >
-              Submit
-            </Button>
+            {show === false ? (
+              <Button
+                colorScheme="teal"
+                size="md"
+                onClick={handleSubmit(onSubmit)}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                isLoading
+                colorScheme="blue"
+                spinner={<BeatLoader size={8} color="white" />}
+              >
+                Click me
+              </Button>
+            )}{" "}
           </CardBody>
         </Card>
       </Stack>

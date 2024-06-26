@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import { Text, useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
+import { BeatLoader } from "react-spinners";
 import Nouser from "@/components/Nouser";
 
 interface State {
@@ -35,6 +36,7 @@ function formm() {
   const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
+  const [show, setShow] = useState(false);
 
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
@@ -69,6 +71,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     }
   }
 
@@ -108,6 +111,7 @@ function formm() {
   };
 
   const onSubmit = async (data: any) => {
+    setShow(true);
     if (data.website !== "") {
       const website = checkurl(data.website);
       if (website) {
@@ -120,6 +124,7 @@ function formm() {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     } else {
@@ -140,6 +145,7 @@ function formm() {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     }
@@ -156,6 +162,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     if (!img_url) {
@@ -166,6 +173,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     const { error } = await supabase
@@ -181,6 +189,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     } else {
       await Harsh();
       handleSubmitt();
@@ -356,13 +365,23 @@ function formm() {
                 />
               </FormControl>{" "}
               <br />
-              <Button
-                colorScheme="teal"
-                size="md"
-                onClick={handleSubmit(onSubmit)}
-              >
-                Submit
-              </Button>
+              {show === false ? (
+                <Button
+                  colorScheme="teal"
+                  size="md"
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  isLoading
+                  colorScheme="blue"
+                  spinner={<BeatLoader size={8} color="white" />}
+                >
+                  Click me
+                </Button>
+              )}{" "}
             </CardBody>
           </Card>
         </Stack>

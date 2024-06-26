@@ -11,8 +11,10 @@ import {
   Box,
   AspectRatio,
   Card,
-  Toast,
 } from "@chakra-ui/react";
+
+
+import { DownloadIcon } from "@chakra-ui/icons";
 import * as htmlToImage from "html-to-image";
 
 import QRCode from "react-qr-code";
@@ -29,23 +31,24 @@ export default function CallToActionWithIllustration() {
   function addInstitutionn(institute: string) {
     router.push("updateprofile/" + institute);
   }
-//   const qrCodeRef = useRef(null);
-// const element = document.getElementById("123456") as HTMLElement;
+  //   const qrCodeRef = useRef(null);
 
-  // const downloadQRCode = () => {
-  //   if (element !== null) {
-  //   htmlToImage
-  //     .toPng(qrCodeRef.current)
-  //     .then(function (dataUrl) {
-  //       const link = document.createElement("a");
-  //       link.href = dataUrl;
-  //       link.download = "qr-code.png";
-  //       link.click();
-  //     })} else {
-  //       console.log("error");
-  //     }
-      
-  // };
+  const downloadQRCode = () => {
+    const element = document.getElementById("123456") as HTMLElement;
+    if (element !== null) {
+      const element = document.getElementById("123456") as HTMLElement;
+
+      htmlToImage.toPng(element).then(function (dataUrl) {
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "qr-code.png";
+        link.click();
+      });
+    } else {
+      console.log("error");
+    }
+  };
+
   let institute;
   if (user && user.user_metadata && user.user_metadata.lastName === "School") {
     institute = "school";
@@ -117,22 +120,32 @@ export default function CallToActionWithIllustration() {
             className="qrcode__image"
           >
             QR Code of your institute <br />
-            <QRCode
-              size={256}
-              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-              value={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
-              viewBox={`0 0 256 256`}
-              id="123456"
-            />
-            {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
+            <div id="123456">
+              <QRCode
+                size={256}
+                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                value={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
+                viewBox={`0 0 256 256`}
+              />
+            </div>
           </div>
           <br />
-      <Stack spacing={6} direction="column" align="center">
-        {" "}    <Link
-            href={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
+          <Stack
+            spacing={6}
+            direction="row"
+            align="center"
+            justifyContent={"center"}
           >
-            <Button colorScheme="linkedin">Visit my institute ↗️</Button>
-          </Link></Stack>
+            {" "}
+            <Button onClick={downloadQRCode} colorScheme="linkedin">
+              <DownloadIcon />
+            </Button>
+            <Link
+              href={`https://shikshafinder.com/${institute}/${useUse.user.user_id}`}
+            >
+              <Button>Visit my institute ↗️</Button>
+            </Link>
+          </Stack>
         </Card>
         <br />
         <Box display="flex" justifyContent="center" alignItems="center">

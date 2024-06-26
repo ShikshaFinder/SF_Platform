@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
+import { BeatLoader } from "react-spinners";
 import { BlobServiceClient } from "@azure/storage-blob";
 
 function formm() {
@@ -35,6 +36,7 @@ function formm() {
   const { register, handleSubmit, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
+  const [show, setShow] = useState(false);
 
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
@@ -67,7 +69,7 @@ function formm() {
     setTimeout(() => {
       Router.reload();
     }, 2000);
-
+    
     Router.push("/aboutcontest");
   };
   if (!user.email) {
@@ -104,10 +106,12 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     }
   }
 
   const onSubmit = async (data: any) => {
+    setShow(true);
     if (data.website !== "") {
       const website = checkurl(data.website);
       if (website) {
@@ -137,6 +141,7 @@ function formm() {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     } else {
@@ -157,6 +162,7 @@ function formm() {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     }
@@ -172,6 +178,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     if (!img_url) {
@@ -182,6 +189,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     const { error } = await supabase
@@ -197,6 +205,7 @@ function formm() {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     } else {
       await Harsh();
       handleSubmitt();
@@ -366,13 +375,23 @@ function formm() {
                 />
               </FormControl>{" "}
               <br />
-              <Button
-                colorScheme="teal"
-                size="md"
-                onClick={handleSubmit(onSubmit)}
-              >
-                Submit
-              </Button>
+              {show === false ? (
+                <Button
+                  colorScheme="teal"
+                  size="md"
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  isLoading
+                  colorScheme="blue"
+                  spinner={<BeatLoader size={8} color="white" />}
+                >
+                  Click me
+                </Button>
+              )}{" "}
             </CardBody>
           </Card>
         </Stack>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
+import { BeatLoader } from "react-spinners";
 
 interface State {
   districts: string[];
@@ -37,6 +38,8 @@ function CoachingForm() {
   const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
+  const [show, setShow] = useState(false);
+
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
     if (url.startsWith(prefix)) {
@@ -48,14 +51,14 @@ function CoachingForm() {
     }
   }
 
-   function checkurl(url: string) {
-     const prefix = "https://";
-     if (url.startsWith(prefix)) {
-       return url;
-     } else {
-       return null;
-     }
-   }
+  function checkurl(url: string) {
+    const prefix = "https://";
+    if (url.startsWith(prefix)) {
+      return url;
+    } else {
+      return null;
+    }
+  }
 
   const handleSubmitt = () => {
     toast({
@@ -65,9 +68,9 @@ function CoachingForm() {
       duration: 3000,
       isClosable: true,
     });
-        setTimeout(() => {
-          Router.reload();
-        }, 2000);
+    setTimeout(() => {
+      Router.reload();
+    }, 2000);
 
     Router.push("/aboutcontest");
   };
@@ -92,59 +95,61 @@ function CoachingForm() {
     return public_url;
   };
 
-async function Harsh() {
-try {
-    const { error } = await supabase.from("votes").insert([{ user_id: user.id }]);
-    
-} catch (error) {
-  toast({
-    title: "Error",
-    description: (error as Error).message,
-    status: "error",
-    duration: 3000,
-    isClosable: true,
-  });
-}
-}
+  async function Harsh() {
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ user_id: user.id }]);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: (error as Error).message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      setShow(false);
+    }
+  }
 
   const onSubmit = async (data: any) => {
- if (data.website !== "") {
-   const website = checkurl(data.website);
-   if (website) {
-     data.website = website;
-   } else {
-     toast({
-       title: "Error",
-       description: "Invalid Website link",
-       status: "error",
-       duration: 3000,
-       isClosable: true,
-     });
-     return;
-   }
- } else {
-   console.log("website is null");
- }
- if (data.locationlink !== "") {
-   const location = checkurl(data.locationlink);
-   if (location) {
-     data.locationlink = location;
-   } else {
-     toast({
-       title: "Error",
-       description: "Invalid Google map link",
-       status: "error",
-       duration: 3000,
-       isClosable: true,
-     });
-     return;
-   }
- } else {
-   console.log("locationlink is null");
- }
-
-    
-
+    setShow(true);
+    if (data.website !== "") {
+      const website = checkurl(data.website);
+      if (website) {
+        data.website = website;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Website link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setShow(false);
+        return;
+      }
+    } else {
+      console.log("website is null");
+    }
+    if (data.locationlink !== "") {
+      const location = checkurl(data.locationlink);
+      if (location) {
+        data.locationlink = location;
+      } else {
+        toast({
+          title: "Error",
+          description: "Invalid Google map link",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setShow(false);
+        return;
+      }
+    } else {
+      console.log("locationlink is null");
+    }
 
     if (data.videolink !== "") {
       const videoId = extractVideoId(data.videolink);
@@ -160,6 +165,7 @@ try {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     }
@@ -175,6 +181,7 @@ try {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     if (!img_url) {
@@ -186,11 +193,12 @@ try {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
       return;
     }
     const { error } = await supabase
       .from("coaching")
-      .insert([{ ...data, user_id: user.id, img: img_url, email: user.email}]);
+      .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
     if (error) {
       console.error("Error submitting Form:", error);
@@ -201,6 +209,7 @@ try {
         duration: 3000,
         isClosable: true,
       });
+      setShow(false);
     } else {
       await Harsh();
       handleSubmitt();
@@ -416,13 +425,23 @@ try {
                 />
               </FormControl>{" "}
               <br />
-              <Button
-                colorScheme="teal"
-                size="md"
-                onClick={handleSubmit(onSubmit)}
-              >
-                Submit
-              </Button>
+              {show === false ? (
+                <Button
+                  colorScheme="teal"
+                  size="md"
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  isLoading
+                  colorScheme="blue"
+                  spinner={<BeatLoader size={8} color="white" />}
+                >
+                  Click me
+                </Button>
+              )}{" "}
             </CardBody>
           </Card>
         </Stack>
