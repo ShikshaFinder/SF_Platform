@@ -31,6 +31,7 @@ const plansList = [
       "50 views of banner ads",
       "minimum 1 admissionForm filled by a student",
       "50 views of video ads",
+      "50 views of customized ad",
       "5% discount on next plan purchase(one time)",
     ],
   },
@@ -42,12 +43,13 @@ const plansList = [
       "750 views of banner ads",
       "minimum 12 forms filled by students",
       "750 views of video ads",
+      "750 views of customized ad",
       "10% discount on next plan purchase(one time)",
     ],
   },
   {
     title: "Custom Plan (Pro)",
-    price: "Contact Us",
+    price: "Contact Us(plans starts from 5999)",
     icon: FaServer,
     features: [
       "Connect us for custom plan",
