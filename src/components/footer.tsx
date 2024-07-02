@@ -11,8 +11,6 @@ import {
 import { FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
 
-import Image from "next/image";
-
 const SocialButton = ({
   children,
   label,
@@ -140,6 +138,30 @@ export default function SmallCentered() {
             >
               <FaLinkedin />
             </SocialButton>
+            <div>
+              <a href="https://platform.shikshafinder.com/termsofservice">
+                {" "}
+                <Text fontSize="xs" as="u">
+                  {" "}
+                  Terms Of Service
+                </Text>
+              </a>
+              &nbsp; <Text fontSize="xs">&</Text>
+              <a href="https://platform.shikshafinder.com/privacypolicy">
+                {" "}
+                <Text fontSize="xs" as="u">
+                  {" "}
+                  Privacy Policy
+                </Text>
+              </a>
+              <a href="https://platform.shikshafinder.com/refundPolicy">
+                {" "}
+                <Text fontSize="xs" as="u">
+                  {" "}
+                  Refund Policy
+                </Text>
+              </a>
+            </div>
           </Stack>
         </Container>
       </Box>
