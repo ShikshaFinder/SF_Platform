@@ -6,7 +6,8 @@ import {
   CardFooter,
   Heading,
   Text,
-  Image,
+  Box,
+  AspectRatio,
   Button,
 } from "@chakra-ui/react";
 import { useUser } from "../../../store";
@@ -23,24 +24,37 @@ function contest() {
 
   return (
     <>
-      <Text as="mark"> Do you have satisfied Students ?</Text>
-      <Card
-        direction={{ base: "column", sm: "row" }}
-        overflow="hidden"
-        variant="outline"
-      >
-        <Image
-          objectFit="cover"
-          maxW={{ base: "100%", sm: "40%" }}
-          height="50vh"
-          src="https://images.unsplash.com/photo-1516463859456-ce782449bfe0?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Caffe Latte"
-        />
+      <Text fontSize={{ base: "3xl", md: "4xl", lg: "4xl", xl: "4xl" }}>
+        {" "}
+        Do you want to win prize worth thousands ?{" "}
+      </Text>
+      <Box m={7}>
+        <Box
+          position={"relative"}
+          height={"auto"}
+          rounded={"2xl"}
+          boxShadow={"2xl"}
+          width={{ base: "full", md: "750px", lg: "750px", xl: "750px" }}
+          overflow={"hidden"}
+          alignContent={"center"}
+          justifyContent={"center"}
+        >
+          <AspectRatio ratio={16 / 9}>
+            <iframe
+              width="600"
+              height="400"
+              src="https://www.youtube.com/embed/-18W-tH_ATM?si=Sw3ltDu7tq0Up7FU"
+              title="Shiksha Finder video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+          </AspectRatio>
+        </Box>
 
         <Stack>
           {/* calll to action */}
           <Heading size="md"> &nbsp; Than you are on a Gold Mine !</Heading>
-          <CardFooter>
+          <Stack direction={"row"}>
+            {" "}
             {useUse && useUse.user_id ? (
               <Copybutton schoolName={useUse.user_id} />
             ) : (
@@ -70,24 +84,26 @@ function contest() {
                 </Button>{" "}
               </>
             )}
-          </CardFooter>
-          <CardBody>
-            <Text py="3" as="b">
-              Share this link to your students and get chance to win prizes
-              worth thousands !
-              <br />
-              <b>
-                Participate in the contest and show the strength you have 💪{" "}
-              </b>
-            </Text><br /><br /><br />
-            <Text py="3" size={"3xl"} as="b">
-              Get assured prices by participating{" "}🚀
-            </Text>
-          </CardBody>
+          </Stack>{" "}
+          {/* </CardFooter> */}
+          {/* <CardBody> */}
+          <Text py="3" as="b">
+            Share this link to your students and get chance to win prizes worth
+            thousands !
+            <br />
+            <b>Participate in the contest and show the strength you have 💪 </b>
+          </Text>
+          <br />
+          <br />
+          <br />
+          <Text py="3" size={"3xl"} as="b">
+            Get assured prices by participating 🚀
+          </Text>
+          {/* </CardBody> */}
         </Stack>
-      </Card>
 
-      <Contestinfo />
+        <Contestinfo />
+      </Box>
     </>
   );
 }

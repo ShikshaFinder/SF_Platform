@@ -15,7 +15,7 @@ function Copybutton({ schoolName }: { schoolName: string }) {
   };
   return (
     <>
-      <Button colorScheme="linkedin" onClick={handleClick}>
+      <Button colorScheme="linkedin" onClick={handleClick} >
         Copy URL
       </Button>
     </>

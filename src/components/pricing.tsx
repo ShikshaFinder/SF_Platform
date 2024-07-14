@@ -49,7 +49,7 @@ const plansList = [
   },
   {
     title: "Custom Plan (Pro)",
-    price: "Contact Us(plans starts from 5999)",
+    price: "Contact Us",
     icon: FaServer,
     features: [
       "Connect us for custom plan",
