@@ -110,7 +110,7 @@ function vedAI() {
               />
             </FormControl>{" "}
             <br />
-            <br />
+            
             <FormControl isRequired>
               <FormLabel>Email</FormLabel>
               <Input
