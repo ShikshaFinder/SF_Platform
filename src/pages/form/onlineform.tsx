@@ -232,6 +232,12 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
+                <b>
+                  {" "}
+                  <small>
+                    Remember to change details according to your institute
+                  </small>
+                </b>
                 <Textarea
                   placeholder="Description of your platform"
                   rows={3}
@@ -243,6 +249,19 @@ function formm() {
                   fontSize={{
                     sm: "sm",
                   }}
+                  defaultValue="Welcome to [Coaching Institute Name]
+Ignite Your Potential, Online!
+
+Are you ready to unlock your full academic potential? At [Coaching Institute Name], we're committed to helping you achieve your goals, right from the comfort of your home. Our expert instructors deliver top-tier education through engaging online classes, designed to fit your schedule.
+
+We specialize in [mention core subjects or exam preparation]. Our proven curriculum, combined with interactive learning tools, will equip you with the knowledge and skills to excel.
+
+Experience the future of learning with us. Let's transform your academic journey together!
+
+Our Students, Our Success:
+[Highlight your online coaching institute's achievements, such as high success rates, student testimonials, or placement records. For example: Our students consistently achieve top percentiles in [exam name], with many securing admissions to [top universities].]
+
+[Include a strong call to action, such as 'Enroll Now' or 'Start Your Free Trial']"
                 />
               </FormControl>
               <br />

@@ -248,7 +248,13 @@ function CoachingForm() {
               </FormControl>
               <br />
               <FormControl isRequired>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Description </FormLabel>
+                <b>
+                  {" "}
+                  <small>
+                    Remember to change details according to your institute
+                  </small>
+                </b>
                 <Textarea
                   placeholder="Description of coaching class"
                   rows={3}
@@ -260,6 +266,16 @@ function CoachingForm() {
                   fontSize={{
                     sm: "sm",
                   }}
+                  defaultValue="Welcome to [Coaching Institute Name]
+
+Are you ready to achieve your academic goals? We're here to help you succeed! Our expert teachers provide top-notch guidance and support to help you excel in your studies.
+
+We focus on [mention core subjects or exam preparation]. Our proven teaching methods and comprehensive study materials will equip you with the knowledge and skills needed to achieve your best.
+
+Join us and experience the difference. Let's work together to make your academic dreams a reality!
+
+Our Results Speak for Themselves:
+[Highlight the coaching institute's achievements, success rates, or student testimonials. For example: Our students consistently achieve top ranks in [exam name], with many securing admissions to prestigious colleges.]"
                 />
               </FormControl>
               <br />

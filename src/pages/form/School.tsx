@@ -249,6 +249,12 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
+                <b>
+                  {" "}
+                  <small>
+                    Remember to change details according to your institute
+                  </small>
+                </b>
                 <Textarea
                   placeholder="Description of your school"
                   rows={3}
@@ -260,6 +266,17 @@ function formm() {
                   fontSize={{
                     sm: "sm",
                   }}
+                  defaultValue="Welcome to [School Name]
+
+We're a community where students love to learn and grow. Our dedicated teachers create a supportive environment for everyone. From exploring exciting subjects to joining fun clubs and sports, there's something for every student.
+
+Our goal is to help you discover your passions and reach your full potential. Let's build a bright future together!
+
+What we are proud of at [School Name]:
+[Highlight school's achievements, awards, or student successes here. For example: Our students have won multiple science fair awards, excelled in state-level competitions, and received scholarships to top universities.]
+
+Extra Curricular Activities:
+[List popular clubs, sports, or extracurricular activities. For example: Join our robotics club, drama troupe, or soccer team. We offer a variety of options to help you discover your talents.]"
                 />
               </FormControl>
               <br />

@@ -1,39 +1,41 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useToast } from "@chakra-ui/react";
+import { useForm, Controller } from "react-hook-form";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
-import Nouser from "@/components/Nouser";
+import { BeatLoader } from "react-spinners";
 
 interface State {
   districts: string[];
   state: string;
 }
-
 import {
   Button,
   FormControl,
   FormLabel,
   Heading,
   Input,
-  Textarea,
+  Checkbox,
   Stack,
+  HStack,
   Card,
   CardBody,
+  CheckboxGroup,
   Select,
+  useToast,
+  Textarea,
   Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
-import { BeatLoader } from "react-spinners";
 import { BlobServiceClient } from "@azure/storage-blob";
+import Nouser from "@/components/Nouser";
 
-function formm() {
+function CoachingForm() {
   const Router = useRouter();
   const toast = useToast();
   const { user } = useAuthContext();
   const form = useForm();
-  const { register, handleSubmit, watch } = form;
+  const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
   const [show, setShow] = useState(false);
@@ -69,7 +71,7 @@ function formm() {
     setTimeout(() => {
       Router.reload();
     }, 2000);
-    
+
     Router.push("/aboutcontest");
   };
   if (!user.email) {
@@ -124,6 +126,7 @@ function formm() {
           duration: 3000,
           isClosable: true,
         });
+        setShow(false);
         return;
       }
     } else {
@@ -166,10 +169,10 @@ function formm() {
         return;
       }
     }
+
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
-      console.log("public url : ", img_url);
     } catch (error) {
       toast({
         title: "Error",
@@ -182,9 +185,10 @@ function formm() {
       return;
     }
     if (!img_url) {
+      console.log("no image found");
       toast({
         title: "Error",
-        description: "Image not uploaded",
+        description: "No image found",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -193,7 +197,7 @@ function formm() {
       return;
     }
     const { error } = await supabase
-      .from("skillclass")
+      .from("coaching")
       .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
     if (error) {
@@ -220,10 +224,7 @@ function formm() {
   const handleImage = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
-    console.log(file);
-    // console.log(Image);
   };
-
   return (
     <>
       <>
@@ -231,51 +232,25 @@ function formm() {
           <Card variant="outline">
             <CardBody>
               <Heading size="md" fontSize="26px">
-                skillclass Registration With Shiksha Finder.{" "}
+                Competitive Exams Registration Form Shiksha Finder
               </Heading>
               <br />
               <FormControl isRequired>
-                <FormLabel>Type Of Skill</FormLabel>
-                <Select
-                  {...register("skilltype", { required: true })}
-                  name="skilltype"
-                  placeholder="SKill Type"
-                >
-                  <option value="art">Art & Crafts</option>
-                  <option value="Business">Business</option>
-                  <option value="coding">coding</option>
-                  <option value="dance">Dance</option>
-                  <option value="designing">Designing</option>
-                  <option value="self-defence">self-deffence</option>
-                  <option value="singing">singing</option>
-                  <option value="sports">sports</option>
-                  <option value="photography">Photography</option>
-                  <option value="other">Other</option>
-                </Select>
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Skillclass Name</FormLabel>
+                <FormLabel>Name Of Your Classes</FormLabel>
                 <Input
-                  {...register("skillclassname", {
+                  {...register("examsname", {
                     required: true,
                   })}
-                  name="skillclassname"
-                  placeholder="SkillClass Name"
+                  name="examsname"
+                  placeholder="ABC Classes"
+                  type="text"
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
-                 <b>
-                  {" "}
-                  <small>
-                    Remember to change details according to your institute
-                  </small>
-                </b>
-                <br />
                 <Textarea
-                  placeholder="Description of your skillclass"
+                  placeholder="We have this Facility and we are best in this"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"
@@ -285,20 +260,7 @@ function formm() {
                   fontSize={{
                     sm: "sm",
                   }}
-                  defaultValue="Welcome to [Coaching Institute Name]
-
-Master Your [Skill Type] Today!
-
-Looking to enhance your [skill type] skills? You've come to the right place! At [Coaching Institute Name], we offer expert online training to help you master [skill type] and take your abilities to the next level.
-
-Our experienced instructors provide comprehensive lessons, interactive exercises, and personalized guidance. Whether you're a beginner or looking to refine your skills, our courses are designed to meet your needs.
-
-Join our vibrant online community and connect with fellow learners. Together, we'll unlock your full potential in [skill type]!
-
-See the Transformation:
-[Highlight the impact of your coaching institute on students' skills. For example: Our students have landed high-paying jobs, started successful businesses, or created groundbreaking projects in [skill type].]
-
-[Include a strong call to action, such as 'Enroll Now' or 'Start Your Free Trial']"
+                  defaultValue=""
                 />
               </FormControl>
               <br />
@@ -311,15 +273,13 @@ See the Transformation:
                   name="location"
                   placeholder="Exact address of institute"
                 />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
+                <br />
                 <Input
                   {...register("locationlink", {
                     required: false,
                   })}
                   name="locationlink"
-                  placeholder="Google map link of skillclass"
+                  placeholder="Google map link of coaching class"
                 />
               </FormControl>
               <br />
@@ -352,7 +312,7 @@ See the Transformation:
                   ))}
                 </Select>
               </FormControl>{" "}
-              <br />
+              <br />{" "}
               <FormControl isRequired>
                 <FormLabel> Sub-District</FormLabel>
                 <Input
@@ -373,12 +333,82 @@ See the Transformation:
               </FormControl>{" "}
               <br />
               <FormControl>
-                <FormLabel>Website</FormLabel>
+                <FormLabel> website</FormLabel>
                 <Input
                   {...register("website", { required: false })}
                   name="website"
-                  placeholder="Website link"
-                />{" "}
+                  type="website"
+                  placeholder="website"
+                />
+              </FormControl>{" "}
+              <br />
+              <FormControl isRequired>
+                <FormLabel>Standard/Exam </FormLabel>
+                <Controller
+                  name="Standard"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        <Checkbox value="Kg">Kinder Garden</Checkbox>
+                        <Checkbox value="ten">1-10</Checkbox>
+                        <Checkbox value="science">11-12 Science</Checkbox>
+                        <Checkbox value="Commerce">11-12 Commerce</Checkbox>
+                        <Checkbox value="Arts">11-12 Arts</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+                />
+                <br />
+                <Input
+                  {...(register("Standard"), { required: false })}
+                  name="Standard"
+                  placeholder="If Teaching for any exam than mention here"
+                />
+              </FormControl>
+              <br />
+              <FormControl as="fieldset">
+                <FormLabel as="legend">Board</FormLabel>
+                <Controller
+                  name="Board"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        {" "}
+                        <Checkbox value="CBSE">CBSE</Checkbox>
+                        <Checkbox value="ICSE">ICSE</Checkbox>
+                        <Checkbox value="State">State Board</Checkbox>
+                        <Checkbox value="IB">IB</Checkbox>
+                        <Checkbox value="AISSCE">AISSCE</Checkbox>
+                        <Checkbox value="NIOS">NIOS</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+                />
+              </FormControl>
+              <br />
+              <FormControl as="fieldset">
+                <FormLabel as="legend">Medium</FormLabel>
+                <Controller
+                  name="medium"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px">
+                        <Checkbox value="Hindi">Hindi Medium</Checkbox>
+                        <Checkbox value="English">English Medium</Checkbox>
+                        <Checkbox value="Native">Native</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+                />
               </FormControl>
               <br />
               <FormControl isRequired>
@@ -421,4 +451,4 @@ See the Transformation:
   );
 }
 
-export default formm;
+export default CoachingForm;
