@@ -237,7 +237,7 @@ function formm() {
               <FormControl isRequired>
                 <FormLabel>Type Of Skill</FormLabel>
                 <Select
-                  {...register("skilltype", { required: true })}
+                  {...register("skilltype", { required: "Skill Type is required" })}
                   name="skilltype"
                   placeholder="SKill Type"
                 >
@@ -258,7 +258,7 @@ function formm() {
                 <FormLabel>Skillclass Name</FormLabel>
                 <Input
                   {...register("skillclassname", {
-                    required: true,
+                    required: "Skillclass Name is required",
                   })}
                   name="skillclassname"
                   placeholder="SkillClass Name"
@@ -280,7 +280,7 @@ function formm() {
                   shadow="sm"
                   focusBorderColor="brand.400"
                   {...register("discription", {
-                    required: true,
+                    required: "Description is required",
                   })}
                   fontSize={{
                     sm: "sm",
@@ -306,7 +306,7 @@ See the Transformation:
                 <FormLabel>Location</FormLabel>
                 <Input
                   {...register("location", {
-                    required: true,
+                    required: "Location is required",
                   })}
                   name="location"
                   placeholder="Exact address of institute"
@@ -341,7 +341,7 @@ See the Transformation:
               <FormControl isRequired>
                 <FormLabel>District/city</FormLabel>
                 <Select
-                  {...register("city", { required: true })}
+                  {...register("city", { required: "District is required" })}
                   name="city"
                   placeholder="Select District"
                 >
@@ -356,7 +356,7 @@ See the Transformation:
               <FormControl isRequired>
                 <FormLabel> Sub-District</FormLabel>
                 <Input
-                  {...register("subdistrict", { required: true })}
+                  {...register("subdistrict", { required: "subdistrict is required" })}
                   name="subdistrict"
                   placeholder="If its main district than just put City name here also"
                 />
@@ -365,7 +365,7 @@ See the Transformation:
               <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
-                  {...register("mobile", { required: true })}
+                  {...register("mobile", { required: "Mobile Number is required" })}
                   name="mobile"
                   type="number"
                   placeholder="Contact number"
@@ -400,7 +400,16 @@ See the Transformation:
                 <Button
                   colorScheme="teal"
                   size="md"
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={handleSubmit(onSubmit,(err)=>{
+                    const Error = Object.values(err).map((error) => error?.message).filter(Boolean);
+                    toast({
+                      title: "Error",
+                      description: Error.join(", "),
+                      status: "error",
+                      duration: 4000,
+                      isClosable: true,
+                    })
+                  })}
                 >
                   Submit
                 </Button>

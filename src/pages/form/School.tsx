@@ -27,6 +27,7 @@ import {
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
 import { BlobServiceClient } from "@azure/storage-blob";
+import { ErrorMessage } from "@hookform/error-message";
 
 function formm() {
   const Router = useRouter();
@@ -37,6 +38,15 @@ function formm() {
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
   const [show, setShow] = useState(false);
+
+interface FormInputs {
+  singleErrorInput: string;
+}
+  const {
+    formState: { errors },
+  } = useForm<FormInputs>();
+console.log(errors);  
+
 
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
@@ -147,7 +157,7 @@ function formm() {
         setShow(false);
         return;
       }
-    } 
+    }
     if (data.locationlink !== "") {
       const location = checkurl(data.locationlink);
       if (location) {
@@ -240,7 +250,7 @@ function formm() {
                 <FormLabel>School Name</FormLabel>
                 <Input
                   {...register("schoolname", {
-                    required: true,
+                    required: "Enter School Name",
                   })}
                   name="schoolname"
                   placeholder="schoolname"
@@ -249,6 +259,7 @@ function formm() {
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
+
                 <b>
                   {" "}
                   <small>
@@ -261,7 +272,7 @@ function formm() {
                   shadow="sm"
                   focusBorderColor="brand.400"
                   {...register("discription", {
-                    required: true,
+                    required: "Enter Description",
                   })}
                   fontSize={{
                     sm: "sm",
@@ -284,7 +295,7 @@ Extra Curricular Activities:
                 <FormLabel>Location</FormLabel>
                 <Input
                   {...register("location", {
-                    required: true,
+                    required: "Enter Location",
                   })}
                   name="location"
                   placeholder="Exact address of institute"
@@ -302,7 +313,7 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel>State</FormLabel>
                 <Select
-                  {...register("State", { required: true })}
+                  {...register("State", { required: "Enter state" })}
                   name="State"
                   placeholder="Select State"
                 >
@@ -317,7 +328,7 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel>District/city</FormLabel>
                 <Select
-                  {...register("District", { required: true })}
+                  {...register("District", { required: "Enter District" })}
                   name="District"
                   placeholder="Select District"
                 >
@@ -332,7 +343,9 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel> Sub-District</FormLabel>
                 <Input
-                  {...register("subdistrict", { required: true })}
+                  {...register("subdistrict", {
+                    required: "Enter subdistrict",
+                  })}
                   name="subdistrict"
                   placeholder="If its main district than just put City name here also"
                 />
@@ -352,7 +365,7 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
-                  {...register("mobile1", { required: true })}
+                  {...register("mobile1", { required: "Enter Mobile Number" })}
                   name="mobile1"
                   type="number"
                   placeholder="Contact number"
@@ -362,7 +375,9 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel>Number Of Students</FormLabel>
                 <Select
-                  {...register("studentnumber", { required: true })}
+                  {...register("studentnumber", {
+                    required: "Enter Number Of Students",
+                  })}
                   name="studentnumber"
                   placeholder="Number Of Students"
                 >
@@ -397,7 +412,7 @@ Extra Curricular Activities:
                   name="Standard"
                   control={control}
                   defaultValue={[]}
-                  rules={{ required: true }}
+                  rules={{ required: "Enter standard" }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
@@ -418,7 +433,7 @@ Extra Curricular Activities:
                   name="Board"
                   control={control}
                   defaultValue={[]}
-                  rules={{ required: true }}
+                  rules={{ required: "Enter Board" }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
@@ -438,7 +453,7 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel> exam</FormLabel>
                 <Input
-                  {...register("exam", { required: false })}
+                  {...register("exam", { required: "Enter Exam" })}
                   name="exam"
                   placeholder="JEE,NEET,etc"
                 />
@@ -450,7 +465,7 @@ Extra Curricular Activities:
                   name="medium"
                   control={control}
                   defaultValue={[]}
-                  rules={{ required: true }}
+                  rules={{ required: "Enter Medium" }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px">
@@ -482,7 +497,19 @@ Extra Curricular Activities:
                 <Button
                   colorScheme="teal"
                   size="md"
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={handleSubmit(onSubmit, (err) => {
+                    const error = Object.values(err)
+                      .map((error) => error?.message)
+                      .filter(Boolean);
+
+                    toast({
+                      title: "Error",
+                      description: error.join(",   "),
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  })}
                 >
                   Submit
                 </Button>

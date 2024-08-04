@@ -40,6 +40,13 @@ function CoachingForm() {
   const [Image, setImage] = useState<any>(null);
   const [show, setShow] = useState(false);
 
+  interface FormInputs {
+    singleErrorInput: string;
+  }
+  const {
+    formState: { errors },
+  } = useForm<FormInputs>();
+  console.log(errors);
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
     if (url.startsWith(prefix)) {
@@ -239,7 +246,7 @@ function CoachingForm() {
                 <FormLabel>Coaching Name</FormLabel>
                 <Input
                   {...register("coachingname", {
-                    required: true,
+                    required: "Enter Coaching Name",
                   })}
                   name="coachingname"
                   placeholder="coaching name"
@@ -261,7 +268,7 @@ function CoachingForm() {
                   shadow="sm"
                   focusBorderColor="brand.400"
                   {...register("discription", {
-                    required: true,
+                    required: "Enter Description",
                   })}
                   fontSize={{
                     sm: "sm",
@@ -283,7 +290,7 @@ Our Results Speak for Themselves:
                 <FormLabel>Location</FormLabel>
                 <Input
                   {...register("location", {
-                    required: true,
+                    required: "Enter location",
                   })}
                   name="location"
                   placeholder="Exact address of institute"
@@ -301,7 +308,7 @@ Our Results Speak for Themselves:
               <FormControl isRequired>
                 <FormLabel>State</FormLabel>
                 <Select
-                  {...register("State", { required: true })}
+                  {...register("State", { required: "Select State" })}
                   name="State"
                   placeholder="Select State"
                 >
@@ -331,7 +338,7 @@ Our Results Speak for Themselves:
               <FormControl isRequired>
                 <FormLabel> Sub-District</FormLabel>
                 <Input
-                  {...register("subdistrict", { required: true })}
+                  {...register("subdistrict", { required: "Enter subdistrict" })}
                   name="subdistrict"
                   placeholder="If its main district than just put City name here also"
                 />
@@ -340,7 +347,7 @@ Our Results Speak for Themselves:
               <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
-                  {...register("mobile", { required: true })}
+                  {...register("mobile", { required: "Enter Mobile Number" })}
                   name="mobile"
                   type="number"
                   placeholder="Contact number"
@@ -363,7 +370,7 @@ Our Results Speak for Themselves:
                   name="Standard"
                   control={control}
                   defaultValue={[]}
-                  rules={{ required: true }}
+                  rules={{ required: "Enter Standard/Exams" }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
@@ -445,7 +452,16 @@ Our Results Speak for Themselves:
                 <Button
                   colorScheme="teal"
                   size="md"
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={handleSubmit(onSubmit,(err)=>{
+                    const Error = Object.values(err).map((error) => error?.message).filter(Boolean);
+                    toast({
+                      title: "Error",
+                      description: Error.join(", "),
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                    })
+                  })}
                 >
                   Submit
                 </Button>

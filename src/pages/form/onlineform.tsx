@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, set } from "react-hook-form";
-import { Text, useToast } from "@chakra-ui/react";
+import { Text, Toast, useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import { BeatLoader } from "react-spinners";
@@ -38,6 +38,13 @@ function formm() {
   const [Image, setImage] = useState<any>(null);
   const [show, setShow] = useState(false);
 
+  interface FormInputs {
+    singleErrorInput: string;
+  }
+  const {
+    formState: { errors },
+  } = useForm<FormInputs>();
+  console.log(errors);
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
     if (url.startsWith(prefix)) {
@@ -207,6 +214,7 @@ function formm() {
     console.log(file);
     // console.log(Image);
   };
+  
 
   return (
     <>
@@ -222,7 +230,7 @@ function formm() {
                 <FormLabel>Online Platform Name</FormLabel>
                 <Input
                   {...register("coachingname", {
-                    required: true,
+                    required: "Name is required",
                   })}
                   name="coachingname"
                   placeholder="Online Platform Name"
@@ -244,7 +252,7 @@ function formm() {
                   shadow="sm"
                   focusBorderColor="brand.400"
                   {...register("discription", {
-                    required: true,
+                    required: "Description is required",
                   })}
                   fontSize={{
                     sm: "sm",
@@ -297,7 +305,7 @@ Our Students, Our Success:
               <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
-                  {...register("mobile", { required: true })}
+                  {...register("mobile", { required: "Enter Mobile Number" })}
                   name="mobile"
                   type="tel"
                   placeholder="Contact number"
@@ -307,7 +315,7 @@ Our Students, Our Success:
               <FormControl isRequired>
                 <FormLabel> website</FormLabel>
                 <Input
-                  {...register("website", { required: true })}
+                  {...register("website", { required: "Enter Website" })}
                   name="website"
                   type="website"
                   placeholder="website"
@@ -356,7 +364,7 @@ Our Students, Our Success:
                   name="medium"
                   control={control}
                   defaultValue={[]}
-                  rules={{ required: true }}
+                  rules={{ required: "Enter Medium" }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px">
@@ -388,7 +396,19 @@ Our Students, Our Success:
                 <Button
                   colorScheme="teal"
                   size="md"
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={handleSubmit(onSubmit, (err) => {
+                    const error = Object.values(err)
+                      .map((error) => error?.message)
+                      .filter(Boolean);
+
+                    toast({
+                      title: "Error",
+                      description: error.join(",   "),
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  })}
                 >
                   Submit
                 </Button>
