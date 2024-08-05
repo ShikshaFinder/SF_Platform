@@ -70,6 +70,12 @@ export default function CallToActionWithIllustration() {
     user.user_metadata.lastName === "skillclass"
   ) {
     institute = "skillclass";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "exams"
+  ) {
+    institute = "exams";
   } else {
     console.log("error");
   }

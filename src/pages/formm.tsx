@@ -66,6 +66,13 @@ function form() {
           >
             Update Skill Class Informtion 🎨
           </Button>
+          <Button
+            colorScheme="teal"
+            size="md"
+            onClick={() => addInstitutionn("exams")}
+          >
+            Update exams Informtion 📚
+          </Button>
         </Stack>
         <br />
         <br />
@@ -124,7 +131,14 @@ function form() {
           size="md"
           onClick={() => addInstitution("skillclass")}
         >
-          I Have A Skill Class 🎨
+          &nbsp; &nbsp; &nbsp; I Have A Skill Class 🎨&nbsp; &nbsp;
+        </Button>
+        <Button
+          colorScheme="teal"
+          size="md"
+          onClick={() => addInstitution("exams")}
+        >
+          I specialize in Exams 📚
         </Button>
       </Stack>
       <br />

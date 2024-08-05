@@ -45,7 +45,8 @@ export const AuthContextProvider = ({ children }: any) => {
             (user && user.user_metadata.lastName === "School") ||
             (user && user.user_metadata.lastName === "coaching") ||
             (user && user.user_metadata.lastName === "onlineform") ||
-            (user && user.user_metadata.lastName === "skillclass")
+            (user && user.user_metadata.lastName === "skillclass") ||
+            (user && user.user_metadata.lastName === "exams") 
           ) {
             const { data, error } = await supabase
           .from(user.user_metadata.lastName)

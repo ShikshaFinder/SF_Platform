@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+// "use client";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
+import { useUser } from "../../../store";
 import { BeatLoader } from "react-spinners";
 
 interface State {
@@ -38,6 +40,7 @@ function CoachingForm() {
   const { register, handleSubmit, control, watch } = form;
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
+  const useUse = useUser((state) => state.user);
   const [show, setShow] = useState(false);
 
   function extractVideoId(url: string) {
@@ -68,11 +71,7 @@ function CoachingForm() {
       duration: 3000,
       isClosable: true,
     });
-    setTimeout(() => {
-      Router.reload();
-    }, 2000);
-
-    Router.push("/aboutcontest");
+    Router.push("/marketing");
   };
   if (!user.email) {
     return <Nouser />;
@@ -94,23 +93,6 @@ function CoachingForm() {
     const public_url = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}`;
     return public_url;
   };
-
-  async function Harsh() {
-    try {
-      const { error } = await supabase
-        .from("votes")
-        .insert([{ user_id: user.id }]);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: (error as Error).message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      setShow(false);
-    }
-  }
 
   const onSubmit = async (data: any) => {
     setShow(true);
@@ -145,6 +127,7 @@ function CoachingForm() {
           isClosable: true,
         });
         setShow(false);
+
         return;
       }
     } else {
@@ -166,13 +149,14 @@ function CoachingForm() {
           isClosable: true,
         });
         setShow(false);
+
         return;
       }
     }
-
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
+      console.log("public url : ", img_url);
     } catch (error) {
       toast({
         title: "Error",
@@ -182,6 +166,7 @@ function CoachingForm() {
         isClosable: true,
       });
       setShow(false);
+
       return;
     }
     if (!img_url) {
@@ -194,24 +179,25 @@ function CoachingForm() {
         isClosable: true,
       });
       setShow(false);
+
       return;
     }
     const { error } = await supabase
-      .from("coaching")
-      .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
+      .from("exams")
+      .update([{ ...data, img: img_url }])
+      .eq("user_id", user.id);
 
     if (error) {
       console.error("Error submitting Form:", error);
       toast({
         title: "Error",
-        description: "Error submitting Form",
+        description: "Error submitting Form, Please try again / contact us",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
       setShow(false);
     } else {
-      await Harsh();
       handleSubmitt();
     }
   };
@@ -224,6 +210,8 @@ function CoachingForm() {
   const handleImage = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
+    console.log(file);
+    // console.log(Image);
   };
   return (
     <>
@@ -232,25 +220,26 @@ function CoachingForm() {
           <Card variant="outline">
             <CardBody>
               <Heading size="md" fontSize="26px">
-                Competitive Exams Registration Form Shiksha Finder
+                Coaching Class Registration Shiksha Finder
               </Heading>
               <br />
               <FormControl isRequired>
-                <FormLabel>Name Of Your Classes</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <Input
-                  {...register("examsname", {
+                  {...register("coachingname", {
                     required: true,
                   })}
-                  name="examsname"
-                  placeholder="ABC Classes"
+                  name="coachingname"
+                  placeholder="coaching name"
                   type="text"
+                  defaultValue={useUse?.examsname || ""}
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
                 <Textarea
-                  placeholder="We have this Facility and we are best in this"
+                  placeholder="Description of your Institute"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"
@@ -260,7 +249,7 @@ function CoachingForm() {
                   fontSize={{
                     sm: "sm",
                   }}
-                  defaultValue=""
+                  defaultValue={useUse?.discription || ""}
                 />
               </FormControl>
               <br />
@@ -272,6 +261,7 @@ function CoachingForm() {
                   })}
                   name="location"
                   placeholder="Exact address of institute"
+                  defaultValue={useUse?.location || ""}
                 />
                 <br />
                 <Input
@@ -280,6 +270,7 @@ function CoachingForm() {
                   })}
                   name="locationlink"
                   placeholder="Google map link of coaching class"
+                  defaultValue={useUse?.locationlink || ""}
                 />
               </FormControl>
               <br />
@@ -319,31 +310,37 @@ function CoachingForm() {
                   {...register("subdistrict", { required: true })}
                   name="subdistrict"
                   placeholder="If its main district than just put City name here also"
+                  defaultValue={useUse?.subdistrict || ""}
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
-                <FormLabel> Mobile Number</FormLabel>
+                <FormLabel>Mobile Number</FormLabel>
                 <Input
                   {...register("mobile", { required: true })}
                   name="mobile"
                   type="number"
                   placeholder="Contact number"
+                  defaultValue={useUse?.mobile || ""}
                 />
               </FormControl>{" "}
               <br />
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel> website</FormLabel>
                 <Input
                   {...register("website", { required: false })}
                   name="website"
                   type="website"
                   placeholder="website"
+                  defaultValue={useUse?.website || ""}
                 />
               </FormControl>{" "}
               <br />
               <FormControl isRequired>
-                <FormLabel>Standard/Exam </FormLabel>
+                <FormLabel>
+                  <b>Exam</b>{" "}
+                </FormLabel>
+                <b>Undergraduate Level</b>
                 <Controller
                   name="Standard"
                   control={control}
@@ -352,29 +349,74 @@ function CoachingForm() {
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="Kg">Kinder Garden</Checkbox>
-                        <Checkbox value="ten">1-10</Checkbox>
-                        <Checkbox value="science">11-12 Science</Checkbox>
-                        <Checkbox value="Commerce">11-12 Commerce</Checkbox>
-                        <Checkbox value="Arts">11-12 Arts</Checkbox>
+                        <Checkbox value="NTSE">NTSE</Checkbox>
+                        <Checkbox value="KVPY">KVPY</Checkbox>
+                        <Checkbox value="Olympiads">Olympiads</Checkbox>
+                        <Checkbox value="JEE">JEE/NEET</Checkbox>
+                        <Checkbox value="NDA">NDA</Checkbox>
+                        <Checkbox value="NIFT">NIFT Entrance Exam</Checkbox>
+                        <Checkbox value="NID">
+                          NID Entrance Exam: For design
+                        </Checkbox>
+                        <Checkbox value="BITSAT">
+                          BITSAT: Birla Institute of Technology and Science
+                          Admission Test
+                        </Checkbox>
                       </HStack>
                     </CheckboxGroup>
                   )}
                 />
                 <br />
-                <Input
-                  {...(register("Standard"), { required: false })}
+                <b>Graduate Level</b>
+                <Controller
                   name="Standard"
-                  placeholder="If Teaching for any exam than mention here"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        <Checkbox value="GATE">GATE</Checkbox>
+                        <Checkbox value="CAT">CAT</Checkbox>
+                        <Checkbox value="XAT">XAT</Checkbox>
+                        <Checkbox value="MAT">JEE/NEET</Checkbox>
+                        <Checkbox value="AIIMS PG">AIIMS PG</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+                />
+                <br />
+                <b>Post Graduate Level</b>
+                <Controller
+                  name="Standard"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: "Enter Exams" }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        <Checkbox value="UPSC">UPSC</Checkbox>
+                        <Checkbox value="SSC">SSC CGL</Checkbox>
+                        <Checkbox value="IBPS">IBPS PO/Clerk</Checkbox>
+                        <Checkbox value="SBI">SBI PO/Clerk</Checkbox>
+                        <Checkbox value="RRB">RRB NTPC</Checkbox>
+                        <Checkbox value="CSIR">CSIR NET</Checkbox>
+                        <Checkbox value="UGC">UGC NET</Checkbox>
+                        <Checkbox value="CA">CA</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
                 />
               </FormControl>
+              <hr />
               <br />
+              {/* <br /> */}
               <FormControl as="fieldset">
                 <FormLabel as="legend">Board</FormLabel>
                 <Controller
                   name="Board"
                   control={control}
-                  defaultValue={[]}
+                  // defaultValue={[{useUse.Board}]}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
@@ -411,9 +453,16 @@ function CoachingForm() {
                 />
               </FormControl>
               <br />
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Upload cover Image</FormLabel>
-                <Input type="file" accept="image/*" onChange={handleImage} />
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage}
+                />{" "}
+                <a>
+                  <small>{useUse.img}</small>
+                </a>
               </FormControl>{" "}
               <br />
               <FormControl>

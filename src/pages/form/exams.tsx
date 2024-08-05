@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller, set } from "react-hook-form";
-import { Text, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
-import Nouser from "@/components/Nouser";
 import { BeatLoader } from "react-spinners";
+
 interface State {
   districts: string[];
   state: string;
@@ -22,14 +21,16 @@ import {
   CardBody,
   CheckboxGroup,
   Select,
+  useToast,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
 import { BlobServiceClient } from "@azure/storage-blob";
-import { ErrorMessage } from "@hookform/error-message";
+import Nouser from "@/components/Nouser";
 
-function formm() {
+function CoachingForm() {
   const Router = useRouter();
   const toast = useToast();
   const { user } = useAuthContext();
@@ -38,15 +39,6 @@ function formm() {
   const [states, setStates] = useState<State[]>(state.states);
   const [Image, setImage] = useState<any>(null);
   const [show, setShow] = useState(false);
-
-interface FormInputs {
-  singleErrorInput: string;
-}
-  const {
-    formState: { errors },
-  } = useForm<FormInputs>();
-console.log(errors);  
-
 
   function extractVideoId(url: string) {
     const prefix = "https://youtu.be/";
@@ -68,23 +60,6 @@ console.log(errors);
     }
   }
 
-  async function Harsh() {
-    try {
-      const { error } = await supabase
-        .from("votes")
-        .insert([{ user_id: user.id }]);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: (error as Error).message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      setShow(false);
-    }
-  }
-
   const handleSubmitt = () => {
     toast({
       title: "Form submitted!",
@@ -93,13 +68,12 @@ console.log(errors);
       duration: 3000,
       isClosable: true,
     });
-
     setTimeout(() => {
       Router.reload();
     }, 2000);
+
     Router.push("/aboutcontest");
   };
-
   if (!user.email) {
     return <Nouser />;
   }
@@ -121,27 +95,25 @@ console.log(errors);
     return public_url;
   };
 
+  async function Harsh() {
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ user_id: user.id }]);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: (error as Error).message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      setShow(false);
+    }
+  }
+
   const onSubmit = async (data: any) => {
     setShow(true);
-    if (data.videolink !== "") {
-      const videoId = extractVideoId(data.videolink);
-
-      if (videoId) {
-        data.videolink = videoId;
-      } else {
-        toast({
-          title: "Error",
-          description:
-            "Invalid YouTube video URL,please take link from youtube app",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-        setShow(false);
-
-        return;
-      }
-    }
     if (data.website !== "") {
       const website = checkurl(data.website);
       if (website) {
@@ -157,6 +129,8 @@ console.log(errors);
         setShow(false);
         return;
       }
+    } else {
+      console.log("website is null");
     }
     if (data.locationlink !== "") {
       const location = checkurl(data.locationlink);
@@ -177,15 +151,32 @@ console.log(errors);
       console.log("locationlink is null");
     }
 
+    if (data.videolink !== "") {
+      const videoId = extractVideoId(data.videolink);
+
+      if (videoId) {
+        data.videolink = videoId;
+      } else {
+        toast({
+          title: "Error",
+          description:
+            "Invalid YouTube video URL,please take link from youtube app",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setShow(false);
+        return;
+      }
+    }
+
     let img_url;
     try {
       img_url = await uploadImageToBlobStorage(Image);
-      console.log("public url : ", img_url);
     } catch (error) {
       toast({
         title: "Error",
-        description:
-          "There is an error uploading image please wait and try again.",
+        description: (error as Error).message,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -194,9 +185,10 @@ console.log(errors);
       return;
     }
     if (!img_url) {
+      console.log("no image found");
       toast({
         title: "Error",
-        description: "Image not uploaded",
+        description: "No image found",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -205,14 +197,14 @@ console.log(errors);
       return;
     }
     const { error } = await supabase
-      .from("School")
+      .from("exams")
       .insert([{ ...data, user_id: user.id, img: img_url, email: user.email }]);
 
     if (error) {
       console.error("Error submitting Form:", error);
       toast({
         title: "Error",
-        description: "Error submitting Form ! Please try again/contact us",
+        description: "Error submitting Form",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -232,10 +224,7 @@ console.log(errors);
   const handleImage = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
-    console.log(file);
-    // console.log(Image);
   };
-
   return (
     <>
       <>
@@ -243,51 +232,48 @@ console.log(errors);
           <Card variant="outline">
             <CardBody>
               <Heading size="md" fontSize="26px">
-                School Registration With Shiksha Finder.{" "}
+                Competitive Exams Registration Form Shiksha Finder
               </Heading>
               <br />
               <FormControl isRequired>
-                <FormLabel>School Name</FormLabel>
+                <FormLabel>Name Of Your Classes</FormLabel>
                 <Input
-                  {...register("schoolname", {
-                    required: "Enter School Name",
+                  {...register("examsname", {
+                    required: true,
                   })}
-                  name="schoolname"
-                  placeholder="schoolname"
+                  name="examsname"
+                  placeholder="ABC Classes"
+                  type="text"
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel>Description</FormLabel>
-
-                <b>
-                  {" "}
-                  <small>
-                    Remember to change details according to your institute
-                  </small>
-                </b>
                 <Textarea
-                  placeholder="Description of your school"
+                  placeholder="We have this Facility and we are best in this"
                   rows={3}
                   shadow="sm"
                   focusBorderColor="brand.400"
                   {...register("discription", {
-                    required: "Enter Description",
+                    required: true,
                   })}
                   fontSize={{
                     sm: "sm",
                   }}
-                  defaultValue="Welcome to [School Name]
+                  defaultValue="Welcome to [Coaching Institute Name]
 
-We're a community where students love to learn and grow. Our dedicated teachers create a supportive environment for everyone. From exploring exciting subjects to joining fun clubs and sports, there's something for every student.
+Crack the [Exam Name] with Us!
 
-Our goal is to help you discover your passions and reach your full potential. Let's build a bright future together!
+Are you determined to ace the [Exam Name]? Look no further! [Coaching Institute Name] is your ultimate companion on this challenging journey. Our expert faculty, combined with a result-oriented curriculum, will equip you with the knowledge and strategies to conquer the [Exam Name].
 
-What we are proud of at [School Name]:
-[Highlight school's achievements, awards, or student successes here. For example: Our students have won multiple science fair awards, excelled in state-level competitions, and received scholarships to top universities.]
+Benefit from our comprehensive online classes, interactive study materials, and mock tests designed to simulate exam conditions. Our personalized guidance will help you identify your strengths and weaknesses, ensuring targeted preparation.
 
-Extra Curricular Activities:
-[List popular clubs, sports, or extracurricular activities. For example: Join our robotics club, drama troupe, or soccer team. We offer a variety of options to help you discover your talents.]"
+Join our community of high-achievers and get the support you need to succeed. Let's make your dream of cracking the [Exam Name] a reality!
+
+Our Track Record:
+[Highlight your coaching institute's success in the [Exam Name], such as the number of selections, top ranks achieved, or student testimonials.]
+
+[Include a strong call to action, such as 'Enroll Now' or 'Start Your Free Trial']"
                 />
               </FormControl>
               <br />
@@ -295,7 +281,7 @@ Extra Curricular Activities:
                 <FormLabel>Location</FormLabel>
                 <Input
                   {...register("location", {
-                    required: "Enter Location",
+                    required: true,
                   })}
                   name="location"
                   placeholder="Exact address of institute"
@@ -306,16 +292,20 @@ Extra Curricular Activities:
                     required: false,
                   })}
                   name="locationlink"
-                  placeholder="Google map link of school <in form of https only"
+                  placeholder="Google map link of coaching class"
+                  defaultValue={
+                    ""
+                  }
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel>State</FormLabel>
                 <Select
-                  {...register("State", { required: "Enter state" })}
+                  {...register("State", { required: true })}
                   name="State"
                   placeholder="Select State"
+                  // defaultValue={"Gujarat"}
                 >
                   {states.map((stateObj) => (
                     <option key={stateObj.state} value={stateObj.state}>
@@ -328,9 +318,10 @@ Extra Curricular Activities:
               <FormControl isRequired>
                 <FormLabel>District/city</FormLabel>
                 <Select
-                  {...register("District", { required: "Enter District" })}
-                  name="District"
+                  {...register("city", { required: true })}
+                  name="city"
                   placeholder="Select District"
+                  // defaultValue={"Bhavnagar}
                 >
                   {districts.map((district) => (
                     <option key={district} value={district}>
@@ -339,123 +330,131 @@ Extra Curricular Activities:
                   ))}
                 </Select>
               </FormControl>{" "}
-              <br />
+              <br />{" "}
               <FormControl isRequired>
                 <FormLabel> Sub-District</FormLabel>
                 <Input
-                  {...register("subdistrict", {
-                    required: "Enter subdistrict",
-                  })}
+                  {...register("subdistrict", { required: true })}
                   name="subdistrict"
                   placeholder="If its main district than just put City name here also"
-                />
-              </FormControl>
-              <br />
-              <FormControl>
-                <FormLabel>Website</FormLabel>
-                <Input
-                  {...register("website", {
-                    required: false,
-                  })}
-                  name="website"
-                  placeholder="https://example.com/"
                 />
               </FormControl>
               <br />
               <FormControl isRequired>
                 <FormLabel> Mobile Number</FormLabel>
                 <Input
-                  {...register("mobile1", { required: "Enter Mobile Number" })}
-                  name="mobile1"
+                  {...register("mobile", { required: true })}
+                  name="mobile"
                   type="number"
                   placeholder="Contact number"
                 />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Number Of Students</FormLabel>
-                <Select
-                  {...register("studentnumber", {
-                    required: "Enter Number Of Students",
-                  })}
-                  name="studentnumber"
-                  placeholder="Number Of Students"
-                >
-                  <option value="15">10-20</option>
-                  <option value="25">20-30</option>
-                  <option value="55">50-60</option>
-                  <option value="85">80-90</option>
-                  <option value="125">100-150</option>
-                  <option value="250">200-500</option>
-                  <option value="850">700-1000</option>
-                  <option value="1500">1200-1800</option>
-                  <option value="2250">2000-2500</option>
-                  <option value="3000">more</option>
-                </Select>
-
-                <br />
               </FormControl>{" "}
               <br />
-              <FormControl isRequired>
-                <FormLabel> DISE code</FormLabel>
+              <FormControl>
+                <FormLabel> website</FormLabel>
                 <Input
-                  {...register("DISE", { required: false })}
-                  name="DISE"
-                  type="number"
-                  placeholder="DISE code"
+                  {...register("website", { required: false })}
+                  name="website"
+                  type="website"
+                  placeholder="website"
                 />
               </FormControl>{" "}
               <br />
               <FormControl isRequired>
-                <FormLabel>Standard </FormLabel>
+                <FormLabel>
+                  <b>Exam</b>{" "}
+                </FormLabel>
+                <b>Undergraduate Level</b>
                 <Controller
                   name="Standard"
                   control={control}
-                  defaultValue={["ten", "science", "Commerce", "Arts"]}
-                  rules={{ required: "Enter standard" }}
+                  defaultValue={[]}
+                  rules={{ required: true }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="Kg">Kinder Garden</Checkbox>
-                        <Checkbox value="ten">1-10</Checkbox>
-                        <Checkbox value="science">11-12 Science</Checkbox>
-                        <Checkbox value="Commerce">11-12 Commerce</Checkbox>
-                        <Checkbox value="Arts">11-12 Arts</Checkbox>
+                        <Checkbox value="NTSE">NTSE</Checkbox>
+                        <Checkbox value="KVPY">KVPY</Checkbox>
+                        <Checkbox value="Olympiads">Olympiads</Checkbox>
+                        <Checkbox value="JEE">JEE/NEET</Checkbox>
+                        <Checkbox value="NDA">NDA</Checkbox>
+                        <Checkbox value="NIFT">NIFT Entrance Exam</Checkbox>
+                        <Checkbox value="NID">
+                          NID Entrance Exam: For design
+                        </Checkbox>
+                        <Checkbox value="BITSAT">
+                          BITSAT: Birla Institute of Technology and Science
+                          Admission Test
+                        </Checkbox>
                       </HStack>
                     </CheckboxGroup>
                   )}
                 />
+                <br />
+                <b>Graduate Level</b>
+                <Controller
+                  name="Standard"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        <Checkbox value="GATE">GATE</Checkbox>
+                        <Checkbox value="CAT">CAT</Checkbox>
+                        <Checkbox value="XAT">XAT</Checkbox>
+                        <Checkbox value="MAT">JEE/NEET</Checkbox>
+                        <Checkbox value="AIIMS PG">AIIMS PG</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+                />
+                <br />
+                <b>Post Graduate Level</b>
+                <Controller
+                  name="Standard"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: "Enter Exams" }}
+                  render={({ field }) => (
+                    <CheckboxGroup {...field}>
+                      <HStack spacing="24px" wrap="wrap">
+                        <Checkbox value="UPSC">UPSC</Checkbox>
+                        <Checkbox value="SSC">SSC CGL</Checkbox>
+                        <Checkbox value="IBPS">IBPS PO/Clerk</Checkbox>
+                        <Checkbox value="SBI">SBI PO/Clerk</Checkbox>
+                        <Checkbox value="RRB">RRB NTPC</Checkbox>
+                        <Checkbox value="CSIR">CSIR NET</Checkbox>
+                        <Checkbox value="UGC">UGC NET</Checkbox>
+                        <Checkbox value="CA">CA</Checkbox>
+                      </HStack>
+                    </CheckboxGroup>
+                  )}
+
+                />
               </FormControl>
+              <hr />
               <br />
               <FormControl as="fieldset">
                 <FormLabel as="legend">Board</FormLabel>
                 <Controller
                   name="Board"
                   control={control}
-                  // defaultValue={[ "State"]}
-                  rules={{ required: "Enter Board" }}
+                  defaultValue={[]}
+                  rules={{ required: true }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px" wrap="wrap">
                         {" "}
                         <Checkbox value="CBSE">CBSE</Checkbox>
                         <Checkbox value="ICSE">ICSE</Checkbox>
+                        <Checkbox value="State">State Board</Checkbox>
                         <Checkbox value="IB">IB</Checkbox>
                         <Checkbox value="AISSCE">AISSCE</Checkbox>
                         <Checkbox value="NIOS">NIOS</Checkbox>
-                        <Checkbox value="State">State Board</Checkbox>
                       </HStack>
                     </CheckboxGroup>
                   )}
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel> exam</FormLabel>
-                <Input
-                  {...register("exam", { required: "Enter Exam" })}
-                  name="exam"
-                  placeholder="JEE,NEET,etc"
                 />
               </FormControl>
               <br />
@@ -464,8 +463,8 @@ Extra Curricular Activities:
                 <Controller
                   name="medium"
                   control={control}
-                  defaultValue={["Native"]}
-                  rules={{ required: "Enter Medium" }}
+                  defaultValue={[]}
+                  rules={{ required: true }}
                   render={({ field }) => (
                     <CheckboxGroup {...field}>
                       <HStack spacing="24px">
@@ -497,19 +496,7 @@ Extra Curricular Activities:
                 <Button
                   colorScheme="teal"
                   size="md"
-                  onClick={handleSubmit(onSubmit, (err) => {
-                    const error = Object.values(err)
-                      .map((error) => error?.message)
-                      .filter(Boolean);
-
-                    toast({
-                      title: "Error",
-                      description: error.join(",   "),
-                      status: "error",
-                      duration: 3000,
-                      isClosable: true,
-                    });
-                  })}
+                  onClick={handleSubmit(onSubmit)}
                 >
                   Submit
                 </Button>
@@ -530,4 +517,4 @@ Extra Curricular Activities:
   );
 }
 
-export default formm;
+export default CoachingForm;

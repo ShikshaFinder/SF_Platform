@@ -65,6 +65,14 @@ const StatsWithIcons = () => {
           .single();
         setUserData(data);
         console.log(data);
+      } else if (user.user_metadata.lastName === "exams") {
+        const { data, error } = await supabase
+          .from("viewexams")
+          .select("view,demolecturesView")
+          .eq("user_id", user.id)
+          .single();
+        setUserData(data);
+        console.log(data);
       } else {
         toast({
           title: "Error",

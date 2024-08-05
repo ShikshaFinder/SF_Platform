@@ -3,7 +3,6 @@ import {
   Tabs,
   TabList,
   TabPanels,
-  Tab,
   TabPanel,
   Button,
   Box,
@@ -27,7 +26,6 @@ function Profile() {
   }
 
     const useUse = useUser((state) => state.user);
-    console.log(useUse);
 
   const CustomTab = React.forwardRef<HTMLElement, any>((props, ref) => {
     const tabProps = useTab({ ...props, ref });
@@ -36,7 +34,6 @@ function Profile() {
 
 
    
-    // console.log(user.id);
   
 
     return (
@@ -69,6 +66,12 @@ function Profile() {
     user.user_metadata.lastName === "skillclass"
   ) {
     institute = "skillclass";
+  } else if (
+    user &&
+    user.user_metadata &&
+    user.user_metadata.lastName === "exams"
+  ) {
+    institute = "exams";
   } else {
     console.log("error");
   }
@@ -89,6 +92,7 @@ function Profile() {
                 useUse?.schoolname ||
                 useUse?.coachingname ||
                 useUse?.skillclassname ||
+                useUse?.examsname ||
                 "Your Name"
               }
               email={useUse?.email || "youmail@gmail.com"}
