@@ -239,7 +239,7 @@ function formm() {
           <Card variant="outline">
             <CardBody>
               <Heading size="md" fontSize="26px">
-                skillclass Registration With Shiksha Finder.{" "}
+                Skill Class Registration With Shiksha Finder.{" "}
               </Heading>
               <br />
               <FormControl isRequired>
