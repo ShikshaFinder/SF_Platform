@@ -24,6 +24,7 @@ import {
   useToast,
   Textarea,
   Text,
+  Container,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -228,39 +229,46 @@ function CoachingForm() {
   return (
     <>
       <>
-        <Stack spacing="4">
-          <Card variant="outline">
-            <CardBody>
-              <Heading size="md" fontSize="26px">
-                Competitive Exams Registration Form Shiksha Finder
-              </Heading>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Name Of Your Classes</FormLabel>
-                <Input
-                  {...register("examsname", {
-                    required: true,
-                  })}
-                  name="examsname"
-                  placeholder="ABC Classes"
-                  type="text"
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Description</FormLabel>
-                <Textarea
-                  placeholder="We have this Facility and we are best in this"
-                  rows={3}
-                  shadow="sm"
-                  focusBorderColor="brand.400"
-                  {...register("discription", {
-                    required: true,
-                  })}
-                  fontSize={{
-                    sm: "sm",
-                  }}
-                  defaultValue="Welcome to [Coaching Institute Name]
+        <Container
+          maxW="container.xl"
+          py={{ base: 4, md: 8, lg: 12 }} // Adds padding based on screen size
+          px={{ base: 4, md: 6, lg: 8 }}
+          borderRadius="md"
+          shadow="lg"
+        >
+          <Stack spacing="4">
+            <Card variant="outline">
+              <CardBody>
+                <Heading size="md" fontSize="26px">
+                  Competitive Exams Registration Form Shiksha Finder
+                </Heading>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Name Of Your Classes</FormLabel>
+                  <Input
+                    {...register("examsname", {
+                      required: true,
+                    })}
+                    name="examsname"
+                    placeholder="ABC Classes"
+                    type="text"
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Description</FormLabel>
+                  <Textarea
+                    placeholder="We have this Facility and we are best in this"
+                    rows={3}
+                    shadow="sm"
+                    focusBorderColor="brand.400"
+                    {...register("discription", {
+                      required: true,
+                    })}
+                    fontSize={{
+                      sm: "sm",
+                    }}
+                    defaultValue="Welcome to [Coaching Institute Name]
 
 Crack the [Exam Name] with Us!
 
@@ -274,244 +282,242 @@ Our Track Record:
 [Highlight your coaching institute's success in the [Exam Name], such as the number of selections, top ranks achieved, or student testimonials.]
 
 [Include a strong call to action, such as 'Enroll Now' or 'Start Your Free Trial']"
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Location</FormLabel>
-                <Input
-                  {...register("location", {
-                    required: true,
-                  })}
-                  name="location"
-                  placeholder="Exact address of institute"
-                />
+                  />
+                </FormControl>
                 <br />
-                <Input
-                  {...register("locationlink", {
-                    required: false,
-                  })}
-                  name="locationlink"
-                  placeholder="Google map link of coaching class"
-                  defaultValue={
-                    ""
-                  }
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>State</FormLabel>
-                <Select
-                  {...register("State", { required: true })}
-                  name="State"
-                  placeholder="Select State"
-                  // defaultValue={"Gujarat"}
-                >
-                  {states.map((stateObj) => (
-                    <option key={stateObj.state} value={stateObj.state}>
-                      {stateObj.state}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>District/city</FormLabel>
-                <Select
-                  {...register("city", { required: true })}
-                  name="city"
-                  placeholder="Select District"
-                  // defaultValue={"Bhavnagar}
-                >
-                  {districts.map((district) => (
-                    <option key={district} value={district}>
-                      {district}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>{" "}
-              <br />{" "}
-              <FormControl isRequired>
-                <FormLabel> Sub-District</FormLabel>
-                <Input
-                  {...register("subdistrict", { required: true })}
-                  name="subdistrict"
-                  placeholder="If its main district than just put City name here also"
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel> Mobile Number</FormLabel>
-                <Input
-                  {...register("mobile", { required: true })}
-                  name="mobile"
-                  type="number"
-                  placeholder="Contact number"
-                />
-              </FormControl>{" "}
-              <br />
-              <FormControl>
-                <FormLabel> website</FormLabel>
-                <Input
-                  {...register("website", { required: false })}
-                  name="website"
-                  type="website"
-                  placeholder="website"
-                />
-              </FormControl>{" "}
-              <br />
-              <FormControl isRequired>
-                <FormLabel>
-                  <b>Exam</b>{" "}
-                </FormLabel>
-                <b>Undergraduate Level</b>
-                <Controller
-                  name="Standard"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="NTSE">NTSE</Checkbox>
-                        <Checkbox value="KVPY">KVPY</Checkbox>
-                        <Checkbox value="Olympiads">Olympiads</Checkbox>
-                        <Checkbox value="JEE">JEE/NEET</Checkbox>
-                        <Checkbox value="NDA">NDA</Checkbox>
-                        <Checkbox value="NIFT">NIFT Entrance Exam</Checkbox>
-                        <Checkbox value="NID">
-                          NID Entrance Exam: For design
-                        </Checkbox>
-                        <Checkbox value="BITSAT">
-                          BITSAT: Birla Institute of Technology and Science
-                          Admission Test
-                        </Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
+                <FormControl isRequired>
+                  <FormLabel>Location</FormLabel>
+                  <Input
+                    {...register("location", {
+                      required: true,
+                    })}
+                    name="location"
+                    placeholder="Exact address of institute"
+                  />
+                  <br />
+                  <Input
+                    {...register("locationlink", {
+                      required: false,
+                    })}
+                    name="locationlink"
+                    placeholder="Google map link of coaching class"
+                    defaultValue={""}
+                  />
+                </FormControl>
                 <br />
-                <b>Graduate Level</b>
-                <Controller
-                  name="Standard"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="GATE">GATE</Checkbox>
-                        <Checkbox value="CAT">CAT</Checkbox>
-                        <Checkbox value="XAT">XAT</Checkbox>
-                        <Checkbox value="MAT">JEE/NEET</Checkbox>
-                        <Checkbox value="AIIMS PG">AIIMS PG</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
+                <FormControl isRequired>
+                  <FormLabel>State</FormLabel>
+                  <Select
+                    {...register("State", { required: true })}
+                    name="State"
+                    placeholder="Select State"
+                    // defaultValue={"Gujarat"}
+                  >
+                    {states.map((stateObj) => (
+                      <option key={stateObj.state} value={stateObj.state}>
+                        {stateObj.state}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
                 <br />
-                <b>Post Graduate Level</b>
-                <Controller
-                  name="Standard"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: "Enter Exams" }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="UPSC">UPSC</Checkbox>
-                        <Checkbox value="SSC">SSC CGL</Checkbox>
-                        <Checkbox value="IBPS">IBPS PO/Clerk</Checkbox>
-                        <Checkbox value="SBI">SBI PO/Clerk</Checkbox>
-                        <Checkbox value="RRB">RRB NTPC</Checkbox>
-                        <Checkbox value="CSIR">CSIR NET</Checkbox>
-                        <Checkbox value="UGC">UGC NET</Checkbox>
-                        <Checkbox value="CA">CA</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-
-                />
-              </FormControl>
-              <hr />
-              <br />
-              <FormControl as="fieldset">
-                <FormLabel as="legend">Board</FormLabel>
-                <Controller
-                  name="Board"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px" wrap="wrap">
-                        {" "}
-                        <Checkbox value="CBSE">CBSE</Checkbox>
-                        <Checkbox value="ICSE">ICSE</Checkbox>
-                        <Checkbox value="State">State Board</Checkbox>
-                        <Checkbox value="IB">IB</Checkbox>
-                        <Checkbox value="AISSCE">AISSCE</Checkbox>
-                        <Checkbox value="NIOS">NIOS</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
-              </FormControl>
-              <br />
-              <FormControl as="fieldset">
-                <FormLabel as="legend">Medium</FormLabel>
-                <Controller
-                  name="medium"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px">
-                        <Checkbox value="Hindi">Hindi Medium</Checkbox>
-                        <Checkbox value="English">English Medium</Checkbox>
-                        <Checkbox value="Native">Native</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Upload cover Image</FormLabel>
-                <Input type="file" accept="image/*" onChange={handleImage} />
-              </FormControl>{" "}
-              <br />
-              <FormControl>
-                <FormLabel> Introduction video Youtube video link</FormLabel>
-                <Text fontSize="xs">You can upload video later</Text>
-                <Input
-                  {...register("videolink", { required: false })}
-                  name="videolink"
-                  placeholder="enter the youtube video link"
-                />
-              </FormControl>{" "}
-              <br />
-              {show === false ? (
-                <Button
-                  colorScheme="teal"
-                  size="md"
-                  onClick={handleSubmit(onSubmit)}
-                >
-                  Submit
-                </Button>
-              ) : (
-                <Button
-                  isLoading
-                  colorScheme="blue"
-                  spinner={<BeatLoader size={8} color="white" />}
-                >
-                  Click me
-                </Button>
-              )}{" "}
-            </CardBody>
-          </Card>
-        </Stack>
+                <FormControl isRequired>
+                  <FormLabel>District/city</FormLabel>
+                  <Select
+                    {...register("city", { required: true })}
+                    name="city"
+                    placeholder="Select District"
+                    // defaultValue={"Bhavnagar}
+                  >
+                    {districts.map((district) => (
+                      <option key={district} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>{" "}
+                <br />{" "}
+                <FormControl isRequired>
+                  <FormLabel> Sub-District</FormLabel>
+                  <Input
+                    {...register("subdistrict", { required: true })}
+                    name="subdistrict"
+                    placeholder="If its main district than just put City name here also"
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel> Mobile Number</FormLabel>
+                  <Input
+                    {...register("mobile", { required: true })}
+                    name="mobile"
+                    type="number"
+                    placeholder="Contact number"
+                  />
+                </FormControl>{" "}
+                <br />
+                <FormControl>
+                  <FormLabel> website</FormLabel>
+                  <Input
+                    {...register("website", { required: false })}
+                    name="website"
+                    type="website"
+                    placeholder="website"
+                  />
+                </FormControl>{" "}
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>
+                    <b>Exam</b>{" "}
+                  </FormLabel>
+                  <b>Undergraduate Level</b>
+                  <Controller
+                    name="Standard"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px" wrap="wrap">
+                          <Checkbox value="NTSE">NTSE</Checkbox>
+                          <Checkbox value="KVPY">KVPY</Checkbox>
+                          <Checkbox value="Olympiads">Olympiads</Checkbox>
+                          <Checkbox value="JEE">JEE/NEET</Checkbox>
+                          <Checkbox value="NDA">NDA</Checkbox>
+                          <Checkbox value="NIFT">NIFT Entrance Exam</Checkbox>
+                          <Checkbox value="NID">
+                            NID Entrance Exam: For design
+                          </Checkbox>
+                          <Checkbox value="BITSAT">
+                            BITSAT: Birla Institute of Technology and Science
+                            Admission Test
+                          </Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                  <br />
+                  <b>Graduate Level</b>
+                  <Controller
+                    name="Standard"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px" wrap="wrap">
+                          <Checkbox value="GATE">GATE</Checkbox>
+                          <Checkbox value="CAT">CAT</Checkbox>
+                          <Checkbox value="XAT">XAT</Checkbox>
+                          <Checkbox value="MAT">JEE/NEET</Checkbox>
+                          <Checkbox value="AIIMS PG">AIIMS PG</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                  <br />
+                  <b>Post Graduate Level</b>
+                  <Controller
+                    name="Standard"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: "Enter Exams" }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px" wrap="wrap">
+                          <Checkbox value="UPSC">UPSC</Checkbox>
+                          <Checkbox value="SSC">SSC CGL</Checkbox>
+                          <Checkbox value="IBPS">IBPS PO/Clerk</Checkbox>
+                          <Checkbox value="SBI">SBI PO/Clerk</Checkbox>
+                          <Checkbox value="RRB">RRB NTPC</Checkbox>
+                          <Checkbox value="CSIR">CSIR NET</Checkbox>
+                          <Checkbox value="UGC">UGC NET</Checkbox>
+                          <Checkbox value="CA">CA</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                </FormControl>
+                <hr />
+                <br />
+                <FormControl as="fieldset">
+                  <FormLabel as="legend">Board</FormLabel>
+                  <Controller
+                    name="Board"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px" wrap="wrap">
+                          {" "}
+                          <Checkbox value="CBSE">CBSE</Checkbox>
+                          <Checkbox value="ICSE">ICSE</Checkbox>
+                          <Checkbox value="State">State Board</Checkbox>
+                          <Checkbox value="IB">IB</Checkbox>
+                          <Checkbox value="AISSCE">AISSCE</Checkbox>
+                          <Checkbox value="NIOS">NIOS</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                </FormControl>
+                <br />
+                <FormControl as="fieldset">
+                  <FormLabel as="legend">Medium</FormLabel>
+                  <Controller
+                    name="medium"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px">
+                          <Checkbox value="Hindi">Hindi Medium</Checkbox>
+                          <Checkbox value="English">English Medium</Checkbox>
+                          <Checkbox value="Native">Native</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Upload cover Image</FormLabel>
+                  <Input type="file" accept="image/*" onChange={handleImage} />
+                </FormControl>{" "}
+                <br />
+                <FormControl>
+                  <FormLabel> Introduction video Youtube video link</FormLabel>
+                  <Text fontSize="xs">You can upload video later</Text>
+                  <Input
+                    {...register("videolink", { required: false })}
+                    name="videolink"
+                    placeholder="enter the youtube video link"
+                  />
+                </FormControl>{" "}
+                <br />
+                {show === false ? (
+                  <Button
+                    colorScheme="teal"
+                    size="md"
+                    onClick={handleSubmit(onSubmit)}
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    isLoading
+                    colorScheme="blue"
+                    spinner={<BeatLoader size={8} color="white" />}
+                  >
+                    Click me
+                  </Button>
+                )}{" "}
+              </CardBody>
+            </Card>
+          </Stack>
+        </Container>
       </>
     </>
   );

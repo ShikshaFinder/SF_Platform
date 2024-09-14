@@ -5,6 +5,7 @@ import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import Nouser from "@/components/Nouser";
 
+
 interface State {
   districts: string[];
   state: string;
@@ -22,6 +23,7 @@ import {
   CardBody,
   Select,
   Text,
+  Container
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { state } from "@/components/state";
@@ -226,7 +228,13 @@ function formm() {
 
   return (
     <>
-      <>
+  <Container
+          maxW="container.xl"
+          py={{ base: 4, md: 8, lg: 12 }} // Adds padding based on screen size
+          px={{ base: 4, md: 6, lg: 8 }}
+          borderRadius="md"
+          shadow="lg"
+        >      
         <Stack spacing="4">
           <Card variant="outline">
             <CardBody>
@@ -425,8 +433,8 @@ See the Transformation:
             </CardBody>
           </Card>
         </Stack>
+        </Container>
       </>
-    </>
   );
 }
 

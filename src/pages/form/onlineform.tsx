@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, set } from "react-hook-form";
-import { Text, Toast, useToast } from "@chakra-ui/react";
+import { Container, Text, Toast, useToast } from "@chakra-ui/react";
 import supabase from "../../../supabase";
 import { useAuthContext } from "@/context";
 import { BeatLoader } from "react-spinners";
@@ -219,45 +219,52 @@ function formm() {
   return (
     <>
       <>
-        <Stack spacing="4">
-          <Card variant="outline">
-            <CardBody>
-              <Heading size="md" fontSize="26px">
-                Online Platfrom Registration Shiksha Finder
-              </Heading>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Online Platform Name</FormLabel>
-                <Input
-                  {...register("coachingname", {
-                    required: "Name is required",
-                  })}
-                  name="coachingname"
-                  placeholder="Online Platform Name"
-                  type="text"
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Description</FormLabel>
-                <b>
-                  {" "}
-                  <small>
-                    Remember to change details according to your institute
-                  </small>
-                </b>
-                <Textarea
-                  placeholder="Description of your platform"
-                  rows={3}
-                  shadow="sm"
-                  focusBorderColor="brand.400"
-                  {...register("discription", {
-                    required: "Description is required",
-                  })}
-                  fontSize={{
-                    sm: "sm",
-                  }}
-                  defaultValue="Welcome to [Coaching Institute Name]
+        <Container
+          maxW="container.xl"
+          py={{ base: 4, md: 8, lg: 12 }} // Adds padding based on screen size
+          px={{ base: 4, md: 6, lg: 8 }}
+          borderRadius="md"
+          shadow="lg"
+        >
+          <Stack spacing="4">
+            <Card variant="outline">
+              <CardBody>
+                <Heading size="md" fontSize="26px">
+                  Online Platfrom Registration Shiksha Finder
+                </Heading>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Online Platform Name</FormLabel>
+                  <Input
+                    {...register("coachingname", {
+                      required: "Name is required",
+                    })}
+                    name="coachingname"
+                    placeholder="Online Platform Name"
+                    type="text"
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Description</FormLabel>
+                  <b>
+                    {" "}
+                    <small>
+                      Remember to change details according to your institute
+                    </small>
+                  </b>
+                  <Textarea
+                    placeholder="Description of your platform"
+                    rows={3}
+                    shadow="sm"
+                    focusBorderColor="brand.400"
+                    {...register("discription", {
+                      required: "Description is required",
+                    })}
+                    fontSize={{
+                      sm: "sm",
+                    }}
+                    defaultValue="Welcome to [Coaching Institute Name]
 Ignite Your Potential, Online!
 
 Are you ready to unlock your full academic potential? At [Coaching Institute Name], we're committed to helping you achieve your goals, right from the comfort of your home. Our expert instructors deliver top-tier education through engaging online classes, designed to fit your schedule.
@@ -270,160 +277,161 @@ Our Students, Our Success:
 [Highlight your online coaching institute's achievements, such as high success rates, student testimonials, or placement records. For example: Our students consistently achieve top percentiles in [exam name], with many securing admissions to [top universities].]
 
 [Include a strong call to action, such as 'Enroll Now' or 'Start Your Free Trial']"
-                />
-              </FormControl>
-              <br />
-              <FormControl>
-                <FormLabel>State</FormLabel>
-                <Input
-                  {...register("State", {
-                    required: false,
-                  })}
-                  name="State"
-                  placeholder="State"
-                />
-              </FormControl>
-              <br />
-              <FormControl>
-                <FormLabel>App Name</FormLabel>
-                <Input
-                  {...register("app", { required: false })}
-                  name="app"
-                  placeholder="App name in playstore"
-                />
-              </FormControl>
-              <br />
-              <FormControl>
-                <FormLabel> Playstore link</FormLabel>
-                <Input
-                  {...register("link", { required: false })}
-                  name="link"
-                  placeholder="link of playstore"
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel> Mobile Number</FormLabel>
-                <Input
-                  {...register("mobile", { required: "Enter Mobile Number" })}
-                  name="mobile"
-                  type="tel"
-                  placeholder="Contact number"
-                />
-              </FormControl>{" "}
-              <br />
-              <FormControl isRequired>
-                <FormLabel> website</FormLabel>
-                <Input
-                  {...register("website", { required: "Enter Website" })}
-                  name="website"
-                  type="website"
-                  placeholder="website"
-                />
-              </FormControl>{" "}
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Standard/Exam </FormLabel>
-                <Controller
-                  name="Standard"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px" wrap="wrap">
-                        <Checkbox value="Kg">Kinder Garden</Checkbox>
-                        <Checkbox value="ten">1-10</Checkbox>
-                        <Checkbox value="science">11-12 Science</Checkbox>
-                        <Checkbox value="Commerce">11-12 Commerce</Checkbox>
-                        <Checkbox value="Arts">11-12 Arts</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
+                  />
+                </FormControl>
                 <br />
-                <Input
-                  {...(register("Standard"), { required: false })}
-                  name="Standard"
-                  placeholder="If Teaching for any exam than mention here"
-                />
-              </FormControl>
-              <br />
-              <FormControl>
-                <FormLabel>Board</FormLabel>
-                <Input
-                  {...register("Board", { required: false })}
-                  name="Board"
-                  placeholder="Board / If applicable"
-                />
-              </FormControl>
-              <br />
-              <FormControl as="fieldset">
-                <FormLabel as="legend">Medium</FormLabel>
-                <Controller
-                  name="medium"
-                  control={control}
-                  defaultValue={[]}
-                  rules={{ required: "Enter Medium" }}
-                  render={({ field }) => (
-                    <CheckboxGroup {...field}>
-                      <HStack spacing="24px">
-                        <Checkbox value="Hindi">Hindi Medium</Checkbox>
-                        <Checkbox value="English">English Medium</Checkbox>
-                        <Checkbox value="Native">Native</Checkbox>
-                      </HStack>
-                    </CheckboxGroup>
-                  )}
-                />
-              </FormControl>
-              <br />
-              <FormControl isRequired>
-                <FormLabel>Upload cover Image</FormLabel>
-                <Input type="file" accept="image/*" onChange={handleImage} />
-              </FormControl>{" "}
-              <br />
-              <FormControl>
-                <FormLabel> Introduction video Youtube video link</FormLabel>
-                <Text fontSize="xs">You can upload video later</Text>
-                <Input
-                  {...register("videolink", { required: false })}
-                  name="videolink"
-                  placeholder="enter the youtube video link"
-                />
-              </FormControl>{" "}
-              <br />
-              {show === false ? (
-                <Button
-                  colorScheme="teal"
-                  size="md"
-                  onClick={handleSubmit(onSubmit, (err) => {
-                    const error = Object.values(err)
-                      .map((error) => error?.message)
-                      .filter(Boolean);
+                <FormControl>
+                  <FormLabel>State</FormLabel>
+                  <Input
+                    {...register("State", {
+                      required: false,
+                    })}
+                    name="State"
+                    placeholder="State"
+                  />
+                </FormControl>
+                <br />
+                <FormControl>
+                  <FormLabel>App Name</FormLabel>
+                  <Input
+                    {...register("app", { required: false })}
+                    name="app"
+                    placeholder="App name in playstore"
+                  />
+                </FormControl>
+                <br />
+                <FormControl>
+                  <FormLabel> Playstore link</FormLabel>
+                  <Input
+                    {...register("link", { required: false })}
+                    name="link"
+                    placeholder="link of playstore"
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel> Mobile Number</FormLabel>
+                  <Input
+                    {...register("mobile", { required: "Enter Mobile Number" })}
+                    name="mobile"
+                    type="tel"
+                    placeholder="Contact number"
+                  />
+                </FormControl>{" "}
+                <br />
+                <FormControl isRequired>
+                  <FormLabel> website</FormLabel>
+                  <Input
+                    {...register("website", { required: "Enter Website" })}
+                    name="website"
+                    type="website"
+                    placeholder="website"
+                  />
+                </FormControl>{" "}
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Standard/Exam </FormLabel>
+                  <Controller
+                    name="Standard"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px" wrap="wrap">
+                          <Checkbox value="Kg">Kinder Garden</Checkbox>
+                          <Checkbox value="ten">1-10</Checkbox>
+                          <Checkbox value="science">11-12 Science</Checkbox>
+                          <Checkbox value="Commerce">11-12 Commerce</Checkbox>
+                          <Checkbox value="Arts">11-12 Arts</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                  <br />
+                  <Input
+                    {...(register("Standard"), { required: false })}
+                    name="Standard"
+                    placeholder="If Teaching for any exam than mention here"
+                  />
+                </FormControl>
+                <br />
+                <FormControl>
+                  <FormLabel>Board</FormLabel>
+                  <Input
+                    {...register("Board", { required: false })}
+                    name="Board"
+                    placeholder="Board / If applicable"
+                  />
+                </FormControl>
+                <br />
+                <FormControl as="fieldset">
+                  <FormLabel as="legend">Medium</FormLabel>
+                  <Controller
+                    name="medium"
+                    control={control}
+                    defaultValue={[]}
+                    rules={{ required: "Enter Medium" }}
+                    render={({ field }) => (
+                      <CheckboxGroup {...field}>
+                        <HStack spacing="24px">
+                          <Checkbox value="Hindi">Hindi Medium</Checkbox>
+                          <Checkbox value="English">English Medium</Checkbox>
+                          <Checkbox value="Native">Native</Checkbox>
+                        </HStack>
+                      </CheckboxGroup>
+                    )}
+                  />
+                </FormControl>
+                <br />
+                <FormControl isRequired>
+                  <FormLabel>Upload cover Image</FormLabel>
+                  <Input type="file" accept="image/*" onChange={handleImage} />
+                </FormControl>{" "}
+                <br />
+                <FormControl>
+                  <FormLabel> Introduction video Youtube video link</FormLabel>
+                  <Text fontSize="xs">You can upload video later</Text>
+                  <Input
+                    {...register("videolink", { required: false })}
+                    name="videolink"
+                    placeholder="enter the youtube video link"
+                  />
+                </FormControl>{" "}
+                <br />
+                {show === false ? (
+                  <Button
+                    colorScheme="teal"
+                    size="md"
+                    onClick={handleSubmit(onSubmit, (err) => {
+                      const error = Object.values(err)
+                        .map((error) => error?.message)
+                        .filter(Boolean);
 
-                    toast({
-                      title: "Error",
-                      description: error.join(",   "),
-                      status: "error",
-                      duration: 3000,
-                      isClosable: true,
-                    });
-                  })}
-                >
-                  Submit
-                </Button>
-              ) : (
-                <Button
-                  isLoading
-                  colorScheme="blue"
-                  spinner={<BeatLoader size={8} color="white" />}
-                >
-                  Click me
-                </Button>
-              )}{" "}
-            </CardBody>
-          </Card>
-        </Stack>
+                      toast({
+                        title: "Error",
+                        description: error.join(",   "),
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                      });
+                    })}
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    isLoading
+                    colorScheme="blue"
+                    spinner={<BeatLoader size={8} color="white" />}
+                  >
+                    Click me
+                  </Button>
+                )}{" "}
+              </CardBody>
+            </Card>
+          </Stack>
+        </Container>
       </>
     </>
   );
