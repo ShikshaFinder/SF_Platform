@@ -1,6 +1,5 @@
 import { useRouter } from "next/router"; // Import the useRouter hook
 import supabase from "../../supabase";
-import { FaGoogle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import {
   Flex,
@@ -39,6 +38,16 @@ export default function Login() {
         redirectTo: "https://platform.shikshafinder.com/",
       },
     });
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
   }
 
   const Signin = async () => {
@@ -57,7 +66,6 @@ export default function Login() {
         email,
         password,
       });
-
       if (error) {
         toast({
           title: "Error.",
@@ -71,10 +79,9 @@ export default function Login() {
 
       setTimeout(() => {
         router.reload();
-      }, 3000);
-      setTimeout(() => {
-        router.push("/form");
       }, 1000);
+
+      router.push("/form");
     } catch (error) {
       console.log(error);
     }
@@ -89,6 +96,7 @@ export default function Login() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
+     
           <Heading fontSize={"4xl"} textAlign={"center"}>
             Sign In
           </Heading>
@@ -119,7 +127,7 @@ export default function Login() {
               <Input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="example@example.com"
+                placeholder="example@gmail.com"
               />
             </FormControl>
             <FormControl id="password" isRequired>
@@ -179,6 +187,7 @@ export default function Login() {
           </Stack>
         </Box>
       </Stack>
+      <Box height={"30px"}></Box>Σ
     </Flex>
   );
 }
