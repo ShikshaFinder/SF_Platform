@@ -183,18 +183,18 @@ export default function CallToActionWithIllustration() {
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
           lineHeight={"110%"}
         >
-          Marketing cost reduced drastically 📉{" "}
+          Connecting students cost reduced to zero !!
           <Text as={"span"} color={"orange.400"}>
-            & made easier
+            & made easier & accessible
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
           Promote the quality of your education with shiksha finder , a platform
           that helps you to reach out to the students and parents in a more
-          efficient way.
+          efficient way and for absolutely free !!
         </Text>
         <Stack spacing={6} direction={"row"}>
-          <Link href="/paysf">
+          <Link href="/formm">
             <Button
               rounded={"full"}
               px={6}
@@ -202,12 +202,12 @@ export default function CallToActionWithIllustration() {
               bg={"orange.400"}
               _hover={{ bg: "orange.500" }}
             >
-              Get started
+              Get Started
             </Button>
           </Link>
-          <Link href="/confirmcode">
+          <Link href="/contactus">
             <Button rounded={"full"} px={6}>
-              Have A Code ?
+              Have Query ? Contact Us
             </Button>
           </Link>
         </Stack>
